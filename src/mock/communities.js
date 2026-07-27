@@ -1,0 +1,157 @@
+export default [
+  {
+    id: 1,
+    slug: 'etom',
+    name: 'ETOM',
+    fullName: 'Eksplorasi Trail Off-road & Motor Pandansari',
+    category: 'Otomotif & Petualangan',
+    thumbnail: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80',
+      'https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?w=1200&q=80',
+    ],
+    description:
+      'ETOM adalah komunitas motor adventure dan trail paling aktif di Desa Pandansari. Dengan anggota lebih dari 60 orang, komunitas ini rutin mengadakan touring ke berbagai daerah di Jawa Tengah dan berperan aktif dalam pemberdayaan wisata alam desa.',
+    shortDescription: 'Komunitas motor adventure & trail aktif dengan 60+ anggota.',
+    founded: '2015',
+    memberCount: 65,
+    achievements: [
+      'Juara 1 Trail Competition Kabupaten Batang 2023',
+      'Penyelenggara event motorcross charity tahunan',
+      'Kontribusi pembuatan jalur trail wisata desa',
+    ],
+    agenda: [
+      { event: 'Touring Bulanan', schedule: 'Minggu pertama setiap bulan' },
+      { event: 'Latihan Trail', schedule: 'Setiap Sabtu pagi' },
+      { event: 'Motorcross Charity', schedule: 'Agustus – September' },
+    ],
+    contact: {
+      ketua: 'Rizki Pratama',
+      phone: '6281234567890',
+      instagram: '@etom_pandansari',
+    },
+    featured: true,
+  },
+  {
+    id: 2,
+    slug: 'ram',
+    name: 'RAM',
+    fullName: 'Rumpun Alam & Mekar Seni Pandansari',
+    category: 'Seni & Budaya',
+    thumbnail: 'https://images.unsplash.com/photo-1566004100631-35d015d6a491?w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1566004100631-35d015d6a491?w=1200&q=80',
+      'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=80',
+    ],
+    description:
+      'RAM adalah komunitas seni dan budaya yang menjadi penjaga warisan tradisi Desa Pandansari. Anggotanya aktif dalam pertunjukan seni ketoprak, tari tradisional, dan musik gamelan yang sering dipentaskan di acara-acara desa maupun luar daerah.',
+    shortDescription: 'Penjaga warisan seni budaya Pandansari: ketoprak, tari, dan gamelan.',
+    founded: '2012',
+    memberCount: 45,
+    achievements: [
+      'Penampil tetap di Festival Budaya Kabupaten Batang',
+      'Juara 2 Lomba Ketoprak Jawa Tengah 2022',
+      'Dokumentasi warisan budaya desa sebagai basis pariwisata',
+    ],
+    agenda: [
+      { event: 'Latihan Gamelan', schedule: 'Rabu & Jumat malam' },
+      { event: 'Pertunjukan Ketoprak', schedule: 'Setiap malam Sabtu Pahing' },
+      { event: 'Festival Budaya', schedule: 'Agustus (menyambut HUT RI)' },
+    ],
+    contact: {
+      ketua: 'Suparmin Hadi',
+      phone: '6289876543210',
+      instagram: '@ram_pandansari',
+    },
+    featured: true,
+  },
+  {
+    id: 3,
+    slug: 'badminton-club',
+    name: 'Badminton Club',
+    fullName: 'Persatuan Badminton Pandansari',
+    category: 'Olahraga',
+    thumbnail: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800&q=80',
+    gallery: ['https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=1200&q=80'],
+    description:
+      'Komunitas olahraga badminton yang aktif di kalangan pemuda dan warga desa. Rutin mengadakan turnamen mingguan, pelatihan untuk anak-anak, dan mengikuti kompetisi antar desa se-Kabupaten Batang.',
+    shortDescription: 'Komunitas badminton aktif: turnamen mingguan dan pelatihan anak.',
+    founded: '2016',
+    memberCount: 38,
+    achievements: [
+      'Juara 3 Turnamen Badminton Antar Desa 2023',
+      'Program pelatihan badminton anak (30 peserta)',
+      'Pembangunan GOR badminton desa',
+    ],
+    agenda: [
+      { event: 'Latihan Rutin', schedule: 'Senin, Rabu, Jumat (18.00 WIB)' },
+      { event: 'Open Turnamen', schedule: '3 bulan sekali' },
+    ],
+    contact: {
+      ketua: 'Wahyu Eko Saputro',
+      phone: '6282345678901',
+      instagram: '@badminton_pandansari',
+    },
+    featured: true,
+  },
+  {
+    id: 4,
+    slug: 'senam-aerobik',
+    name: 'Senam Aerobik',
+    fullName: 'Kelompok Senam Aerobik Pandansari',
+    category: 'Kesehatan & Olahraga',
+    thumbnail: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80',
+    gallery: ['https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&q=80'],
+    description:
+      'Kelompok senam aerobik ibu-ibu dan warga yang rutin melakukan olahraga bersama setiap pagi di lapangan desa. Dipandu instruktur bersertifikat, kegiatan ini menjadi agenda rutin yang menyehatkan dan mempererat silaturahmi warga.',
+    shortDescription: 'Senam aerobik rutin setiap pagi untuk semua kalangan warga desa.',
+    founded: '2017',
+    memberCount: 55,
+    achievements: [
+      'Juara 2 Senam Massal HUT Kabupaten Batang 2022',
+      'Peserta Festival Olahraga Masyarakat Jawa Tengah',
+    ],
+    agenda: [
+      { event: 'Senam Pagi Rutin', schedule: 'Setiap Minggu 06.30 WIB' },
+      { event: 'Senam Khusus Ibu PKK', schedule: 'Setiap Rabu 07.00 WIB' },
+    ],
+    contact: {
+      ketua: 'Sri Wahyuni',
+      phone: '6283456789012',
+      instagram: '@senam_pandansari',
+    },
+    featured: false,
+  },
+  {
+    id: 5,
+    slug: 'komunitas-bonsai',
+    name: 'Komunitas Bonsai',
+    fullName: 'Persatuan Pencinta Bonsai Pandansari',
+    category: 'Seni & Hobi',
+    thumbnail: 'https://images.unsplash.com/photo-1512428813834-c702c7702b78?w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1512428813834-c702c7702b78?w=1200&q=80',
+      'https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?w=1200&q=80',
+    ],
+    description:
+      'Komunitas pencinta dan pengrajin bonsai yang menjadi salah satu kebanggaan Desa Pandansari. Anggotanya aktif membudidayakan berbagai jenis bonsai asli Jawa dan mengikuti pameran tingkat nasional. Produk bonsai desa telah dikenal hingga luar Jawa.',
+    shortDescription: 'Komunitas bonsai yang dikenal hingga nasional dengan koleksi khas Jawa.',
+    founded: '2013',
+    memberCount: 28,
+    achievements: [
+      'Juara 1 Kontes Bonsai Nasional Kategori Ficus 2023',
+      'Pameran bonsai Pandansari dihadiri 1000+ pengunjung',
+      'Ekspor bonsai ke Jepang dan Eropa melalui mitra',
+    ],
+    agenda: [
+      { event: 'Workshop Bonsai Bulanan', schedule: 'Minggu kedua setiap bulan' },
+      { event: 'Pameran Tahunan', schedule: 'Desember' },
+    ],
+    contact: {
+      ketua: 'Gunawan Susilo',
+      phone: '6284567890123',
+      instagram: '@bonsai_pandansari',
+    },
+    featured: false,
+  },
+]
