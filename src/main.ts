@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { createUnhead } from '@unhead/vue'
+import { createHead } from '@unhead/vue/client'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -17,9 +17,9 @@ AOS.init({
 
 const app = createApp(App)
 
-// Initialise unhead and provide to Vue app context
-const head = createUnhead()
-app.provide('usehead', head)
+// Initialise unhead as Vue plugin
+const head = createHead()
+app.use(head)
 
 app.use(createPinia())
 app.use(router)
