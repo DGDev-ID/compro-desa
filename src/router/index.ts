@@ -23,11 +23,11 @@ const router = createRouter({
       name: 'destinasi',
       component: () => import('@/views/DestinasiView.vue'),
     },
-    // {
-    //   path: '/destinasi/:slug',
-    //   name: 'destinasi-detail',
-    //   component: () => import('@/views/DestinasiDetailView.vue'),
-    // },
+    {
+      path: '/destinasi/:slug',
+      name: 'destinasi-detail',
+      component: () => import('@/views/DestinasiDetailView.vue'),
+    },
     // {
     //   path: '/komunitas',
     //   name: 'komunitas',
