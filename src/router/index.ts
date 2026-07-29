@@ -18,11 +18,11 @@ const router = createRouter({
       name: 'profil',
       component: () => import('@/views/ProfilView.vue'),
     },
-    // {
-    //   path: '/destinasi',
-    //   name: 'destinasi',
-    //   component: () => import('@/views/DestinasiView.vue'),
-    // },
+    {
+      path: '/destinasi',
+      name: 'destinasi',
+      component: () => import('@/views/DestinasiView.vue'),
+    },
     // {
     //   path: '/destinasi/:slug',
     //   name: 'destinasi-detail',
