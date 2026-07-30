@@ -38,16 +38,16 @@ const router = createRouter({
       name: 'komunitas-detail',
       component: () => import('@/views/KomunitasDetailView.vue'),
     },
-    // {
-    //   path: '/umkm',
-    //   name: 'umkm',
-    //   component: () => import('@/views/UMKMView.vue'),
-    // },
-    // {
-    //   path: '/umkm/:slug',
-    //   name: 'umkm-detail',
-    //   component: () => import('@/views/UMKMDetailView.vue'),
-    // },
+    {
+      path: '/umkm',
+      name: 'umkm',
+      component: () => import('@/views/UMKMView.vue'),
+    },
+    {
+      path: '/umkm/:slug',
+      name: 'umkm-detail',
+      component: () => import('@/views/UMKMDetailView.vue'),
+    },
     // {
     //   path: '/artikel',
     //   name: 'artikel',
