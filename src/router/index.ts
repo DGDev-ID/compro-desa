@@ -28,16 +28,16 @@ const router = createRouter({
       name: 'destinasi-detail',
       component: () => import('@/views/DestinasiDetailView.vue'),
     },
-    // {
-    //   path: '/komunitas',
-    //   name: 'komunitas',
-    //   component: () => import('@/views/KomunitasView.vue'),
-    // },
-    // {
-    //   path: '/komunitas/:slug',
-    //   name: 'komunitas-detail',
-    //   component: () => import('@/views/KomunitasDetailView.vue'),
-    // },
+    {
+      path: '/komunitas',
+      name: 'komunitas',
+      component: () => import('@/views/KomunitasView.vue'),
+    },
+    {
+      path: '/komunitas/:slug',
+      name: 'komunitas-detail',
+      component: () => import('@/views/KomunitasDetailView.vue'),
+    },
     // {
     //   path: '/umkm',
     //   name: 'umkm',
