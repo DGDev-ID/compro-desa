@@ -48,21 +48,21 @@ const router = createRouter({
       name: 'umkm-detail',
       component: () => import('@/views/UMKMDetailView.vue'),
     },
-    // {
-    //   path: '/artikel',
-    //   name: 'artikel',
-    //   component: () => import('@/views/ArtikelView.vue'),
-    // },
-    // {
-    //   path: '/artikel/:slug',
-    //   name: 'artikel-detail',
-    //   component: () => import('@/views/ArtikelDetailView.vue'),
-    // },
-    // {
-    //   path: '/kontak',
-    //   name: 'kontak',
-    //   component: () => import('@/views/KontakView.vue'),
-    // },
+    {
+      path: '/artikel',
+      name: 'artikel',
+      component: () => import('@/views/ArtikelView.vue'),
+    },
+    {
+      path: '/artikel/:slug',
+      name: 'artikel-detail',
+      component: () => import('@/views/ArtikelDetailView.vue'),
+    },
+    {
+      path: '/kontak',
+      name: 'kontak',
+      component: () => import('@/views/KontakView.vue'),
+    },
     {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
