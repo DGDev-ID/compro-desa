@@ -181,23 +181,32 @@ onMounted(async () => {
       </div>
     </section>
 
-    <!-- ══════════════════════════════ STATISTICS ══════════════════════════════ -->
+    <!-- ══════════════════════════════ POTENSI DESA ══════════════════════════════ -->
     <section class="section-padding" style="background-color: #EEF5E3;">
       <div class="container-site">
         <SectionTitle
-          label="Pandansari dalam Angka"
-          title="Kebanggaan Desa Kami"
-          description="Angka-angka yang mencerminkan kemajuan dan semangat Desa Pandansari."
+          label="Potensi"
+          title="POTENSI DESA"
+          description="Desa Wisata Pandansari memiliki beragam potensi alam, wisata, dan ekonomi lokal yang berkembang melalui semangat gotong royong masyarakat."
           centered
         />
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          <StatisticCard
-            v-for="stat in statistics"
-            :key="stat.id"
-            :stat="stat"
-            data-aos="fade-up"
-            :data-aos-delay="statistics.indexOf(stat) * 60"
-          />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+          <div class="card-base p-6 hover:shadow-soft-xl transition-all duration-300">
+            <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2"><span class="text-2xl">🌊</span> Wisata Alam</h3>
+            <p class="text-body leading-relaxed">Nikmati keindahan alam Desa Wisata Pandansari melalui berbagai destinasi wisata yang menawarkan pengalaman rekreasi, petualangan, dan suasana pedesaan yang asri.</p>
+          </div>
+          <div class="card-base p-6 hover:shadow-soft-xl transition-all duration-300">
+            <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2"><span class="text-2xl">🏕️</span> Aktivitas Wisata</h3>
+            <p class="text-body leading-relaxed">Beragam aktivitas dapat dinikmati oleh wisatawan, mulai dari river tubing, outbound, camping, memancing, hingga bersantai di tepi sungai.</p>
+          </div>
+          <div class="card-base p-6 hover:shadow-soft-xl transition-all duration-300">
+            <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2"><span class="text-2xl">🛍️</span> UMKM & Ekonomi Lokal</h3>
+            <p class="text-body leading-relaxed">Desa Pandansari memiliki potensi ekonomi lokal yang didukung oleh UMKM makanan khas Opak, UMKM Desa Wisata, pertanian, perikanan, serta Pasar Pandansari yang menjadi bagian dari kehidupan masyarakat.</p>
+          </div>
+          <div class="card-base p-6 hover:shadow-soft-xl transition-all duration-300">
+            <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2"><span class="text-2xl">🤝</span> Komunitas Aktif</h3>
+            <p class="text-body leading-relaxed">Berbagai komunitas masyarakat berperan aktif dalam mendukung kegiatan sosial, olahraga, pelestarian lingkungan, serta pengembangan Desa Wisata Pandansari sehingga tercipta desa yang dinamis dan harmonis.</p>
+          </div>
         </div>
       </div>
     </section>

@@ -12,7 +12,7 @@ const navLinks = [
   { to: '/profil', label: 'Profil Desa' },
   { to: '/destinasi', label: 'Destinasi Wisata' },
   { to: '/komunitas', label: 'Komunitas' },
-  { to: '/umkm', label: 'UMKM & Ekonomi' },
+  { to: '/umkm', label: 'Potensi & Ekonomi' },
   { to: '/artikel', label: 'Artikel' },
   { to: '/kontak', label: 'Kontak' },
 ]
@@ -38,9 +38,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   <header
     :class="[
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-      isScrolled
-        ? 'bg-white/95 backdrop-blur-md shadow-soft'
-        : 'bg-transparent',
+      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-soft' : 'bg-transparent',
     ]"
   >
     <div class="container-site">
@@ -49,7 +47,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
         <RouterLink to="/" class="flex items-center gap-3 group" @click="closeMobile">
           <div
             class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-soft transition-transform group-hover:scale-105"
-            style="background-color: #4F6F52;"
+            style="background-color: #4f6f52"
           >
             P
           </div>
@@ -79,8 +77,8 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
                 isActive(link)
                   ? 'text-forest bg-primary/20'
                   : isScrolled
-                  ? 'text-heading hover:text-forest hover:bg-alt'
-                  : 'text-white/90 hover:text-white hover:bg-white/10',
+                    ? 'text-heading hover:text-forest hover:bg-alt'
+                    : 'text-white/90 hover:text-white hover:bg-white/10',
               ]"
             >
               {{ link.label }}
@@ -89,10 +87,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
         </ul>
 
         <!-- CTA Button (desktop) -->
-        <RouterLink
-          to="/kontak"
-          class="hidden lg:inline-flex btn-primary text-sm py-2.5 px-5"
-        >
+        <RouterLink to="/kontak" class="hidden lg:inline-flex btn-primary text-sm py-2.5 px-5">
           Hubungi Kami
         </RouterLink>
 

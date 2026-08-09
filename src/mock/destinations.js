@@ -42,6 +42,20 @@ Tersedia pemandu berpengalaman yang akan memastikan keselamatan dan kenyamanan s
     reviewCount: 312,
     featured: true,
     tags: ['Air', 'Keluarga', 'Petualangan'],
+    packages: [
+      {
+        price: 'Rp60.000/Orang (minimal 5 orang)',
+        includes: [
+          'Perlengkapan Tubing',
+          'Transportasi lokal',
+          'Guide',
+          'Makan',
+          'Dokumentasi foto',
+          'Asuransi',
+        ],
+      },
+    ],
+    certifications: ['Sertifikat CHSE', 'Sertifikat Pemandu Wisata Air'],
   },
   {
     id: 2,

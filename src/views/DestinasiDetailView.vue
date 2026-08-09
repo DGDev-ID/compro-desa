@@ -183,21 +183,29 @@ watch(() => route.params.slug, (slug) => {
                 </ul>
               </div>
 
-              <!-- Google Maps -->
-              <div class="card-base overflow-hidden">
-                <div class="p-4 border-b border-border flex items-center gap-2">
-                  <MapPinIcon class="w-4 h-4 text-forest" />
-                  <h3 class="font-heading font-semibold text-heading text-sm">Lokasi</h3>
+              <!-- Informasi Paket -->
+              <div v-if="destination.packages && destination.packages.length" class="card-base p-6 mb-6">
+                <h3 class="font-heading font-semibold text-heading mb-4">Informasi Paket</h3>
+                <div v-for="(pkg, idx) in destination.packages" :key="idx" class="mb-4 last:mb-0">
+                  <p class="font-medium text-heading mb-2">Harga: {{ pkg.price }}</p>
+                  <ul class="list-none text-sm text-body space-y-1">
+                    <li v-for="item in pkg.includes" :key="item" class="flex gap-2">
+                      <CheckIcon class="w-4 h-4 text-forest flex-shrink-0 mt-0.5" />
+                      {{ item }}
+                    </li>
+                  </ul>
                 </div>
-                <div class="aspect-video">
-                  <iframe
-                    :src="`https://www.google.com/maps?q=${destination.coordinates.lat},${destination.coordinates.lng}&z=15&output=embed`"
-                    class="w-full h-full"
-                    frameborder="0"
-                    loading="lazy"
-                    allowfullscreen
-                  />
-                </div>
+              </div>
+
+              <!-- Sertifikat -->
+              <div v-if="destination.certifications && destination.certifications.length" class="card-base p-6">
+                <h3 class="font-heading font-semibold text-heading mb-4">Sertifikat</h3>
+                <ul class="space-y-2">
+                  <li v-for="(cert, i) in destination.certifications" :key="i" class="flex gap-2 text-sm text-body">
+                    <CheckIcon class="w-4 h-4 text-earth flex-shrink-0 mt-0.5" />
+                    {{ cert }}
+                  </li>
+                </ul>
               </div>
             </div>
 

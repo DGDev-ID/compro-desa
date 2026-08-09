@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import SectionTitle from '@/components/common/SectionTitle.vue'
-import TimelineItem from '@/components/profile/TimelineItem.vue'
+
 import CtaSection from '@/components/common/CtaSection.vue'
 import { usePageHead } from '@/composables/usePageHead'
 import { getProfile } from '@/services/profile.service'
@@ -228,33 +228,7 @@ onMounted(async () => {
         </div>
       </section>
 
-      <!-- ─── Timeline ─── -->
-      <section class="section-padding" style="background-color: #EEF5E3;">
-        <div class="container-site">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div data-aos="fade-right">
-              <SectionTitle label="Perjalanan Desa" title="Timeline Perkembangan Pandansari" />
-              <div class="mt-2">
-                <TimelineItem
-                  v-for="(item, i) in profile.timeline"
-                  :key="i"
-                  :year="item.year"
-                  :event="item.event"
-                  :is-last="i === profile.timeline.length - 1"
-                />
-              </div>
-            </div>
-            <div class="rounded-2xl overflow-hidden shadow-soft-lg h-96 lg:h-full min-h-64 sticky top-24" data-aos="fade-left">
-              <img
-                src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80"
-                alt="Panorama Desa Pandansari"
-                class="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+
     </div>
 
     <CtaSection />

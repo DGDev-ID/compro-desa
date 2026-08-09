@@ -9,7 +9,7 @@ import { usePageHead } from '@/composables/usePageHead'
 import { getUMKMList, getUMKMCategories } from '@/services/umkm.service'
 
 usePageHead({
-  title: 'UMKM & Ekonomi Lokal',
+  title: 'Potensi & Ekonomi',
   description: 'Temukan berbagai produk dan usaha UMKM unggulan Desa Pandansari: opak, pertanian organik, batik, dan banyak lagi.',
 })
 
@@ -49,7 +49,7 @@ onMounted(loadData)
       <div class="absolute inset-0 hero-overlay flex items-end pb-10">
         <div class="container-site">
           <span class="section-label mb-3 text-white/80">Ekonomi Desa</span>
-          <h1 class="font-heading font-bold text-white text-3xl md:text-5xl">UMKM & Ekonomi Lokal</h1>
+          <h1 class="font-heading font-bold text-white text-3xl md:text-5xl">Potensi & Ekonomi</h1>
         </div>
       </div>
     </section>
@@ -64,7 +64,7 @@ onMounted(loadData)
         />
 
         <!-- Category Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-10">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto mb-10">
           <button
             class="flex flex-col items-center gap-2 p-4 rounded-2xl border text-center transition-all"
             :class="

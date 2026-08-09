@@ -11,7 +11,7 @@ const quickLinks = [
   { to: '/profil', label: 'Profil Desa' },
   { to: '/destinasi', label: 'Destinasi Wisata' },
   { to: '/komunitas', label: 'Komunitas' },
-  { to: '/umkm', label: 'UMKM & Ekonomi' },
+  { to: '/umkm', label: 'Potensi & Ekonomi' },
   { to: '/artikel', label: 'Artikel' },
   { to: '/kontak', label: 'Kontak' },
 ]

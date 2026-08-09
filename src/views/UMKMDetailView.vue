@@ -75,45 +75,6 @@ function formatPrice(p) {
                 <p class="text-body leading-relaxed">{{ umkm.description }}</p>
               </div>
 
-              <!-- Products -->
-              <div class="card-base p-6">
-                <div class="flex items-center gap-2 mb-4">
-                  <ShoppingBagIcon class="w-5 h-5 text-earth" />
-                  <h2 class="font-heading font-semibold text-heading">Produk / Layanan</h2>
-                </div>
-                <div class="overflow-x-auto">
-                  <table class="w-full text-sm">
-                    <thead>
-                      <tr class="text-left border-b border-border">
-                        <th class="pb-2 font-heading font-semibold text-heading">Produk</th>
-                        <th class="pb-2 font-heading font-semibold text-heading">Satuan</th>
-                        <th class="pb-2 font-heading font-semibold text-heading text-right">Harga</th>
-                      </tr>
-                    </thead>
-                    <tbody class="divide-y divide-border">
-                      <tr v-for="(prod, i) in umkm.products" :key="i">
-                        <td class="py-3 text-heading font-medium">{{ prod.name }}</td>
-                        <td class="py-3 text-body">{{ prod.unit }}</td>
-                        <td class="py-3 text-forest font-semibold text-right">
-                          {{ prod.price ? formatPrice(prod.price) : 'Hubungi kami' }}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              <!-- Certifications -->
-              <div v-if="umkm.certifications.length" class="card-base p-6">
-                <h2 class="font-heading font-semibold text-heading mb-3">Sertifikasi & Legalitas</h2>
-                <ul class="space-y-2">
-                  <li v-for="(cert, i) in umkm.certifications" :key="i" class="flex gap-2 text-sm text-body">
-                    <CheckIcon class="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
-                    {{ cert }}
-                  </li>
-                </ul>
-              </div>
-
               <!-- Gallery -->
               <div v-if="umkm.gallery.length > 1">
                 <h2 class="font-heading font-semibold text-heading text-lg mb-4">Galeri</h2>
