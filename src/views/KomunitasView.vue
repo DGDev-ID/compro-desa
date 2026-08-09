@@ -16,7 +16,8 @@ const communities = ref([])
 const loading = ref(true)
 
 onMounted(async () => {
-  communities.value = await getCommunities()
+  const res = await getCommunities({ perPage: 20 })
+  communities.value = res.data
   loading.value = false
 })
 </script>

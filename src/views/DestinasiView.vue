@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import SectionTitle from '@/components/common/SectionTitle.vue'
 import DestinationCard from '@/components/destination/DestinationCard.vue'
@@ -20,14 +20,13 @@ const activeCategory = ref('Semua')
 const categories = ref(['Semua'])
 
 onMounted(async () => {
-  destinations.value = await getDestinations()
-  const cats = [...new Set(destinations.value.map((d) => d.category))]
+  const res = await getDestinations({ perPage: 50 })
+  destinations.value = res.data
+  const cats = [...new Set(destinations.value.map((d) => d.category).filter(Boolean))]
   categories.value = ['Semua', ...cats]
   loading.value = false
 })
 
-const filtered = ref([])
-import { computed } from 'vue'
 const filteredDestinations = computed(() => {
   if (activeCategory.value === 'Semua') return destinations.value
   return destinations.value.filter((d) => d.category === activeCategory.value)

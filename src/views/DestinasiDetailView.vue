@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Thumbs } from 'swiper/modules'
@@ -60,6 +60,29 @@ async function loadData(slug) {
   related.value = await getRelatedDestinations(slug, 3)
   loading.value = false
 }
+
+// WhatsApp number: prefer destination-specific, fallback to default
+const waNumber = computed(() => destination.value?.whatsapp || '6285123456789')
+
+// Harga helpers — harga is now an object/array from backend
+const hargaWeekday = computed(() => {
+  const h = destination.value?.price
+  if (!h) return null
+  if (typeof h === 'object' && !Array.isArray(h)) {
+    // object {weekday, weekend, group, note} or similar
+    if (h.weekday) return formatPrice(h.weekday)
+    // try to find first numeric value
+    const first = Object.values(h).find((v) => typeof v === 'number')
+    return first ? formatPrice(first) : null
+  }
+  return null
+})
+
+const hargaNote = computed(() => {
+  const h = destination.value?.price
+  if (!h || typeof h !== 'object' || Array.isArray(h)) return null
+  return h.note || h.keterangan || null
+})
 
 onMounted(() => loadData(route.params.slug))
 watch(() => route.params.slug, (slug) => {
@@ -143,19 +166,22 @@ watch(() => route.params.slug, (slug) => {
             <div class="lg:col-span-2">
               <div class="flex flex-wrap gap-2 mb-3">
                 <AppBadge :label="destination.category" variant="primary" />
-                <div v-for="tag in destination.tags" :key="tag" class="flex items-center gap-1">
-                  <AppBadge :label="tag" variant="forest" />
-                </div>
+                <template v-if="destination.tags && destination.tags.length">
+                  <div v-for="tag in destination.tags" :key="tag" class="flex items-center gap-1">
+                    <AppBadge :label="tag" variant="forest" />
+                  </div>
+                </template>
               </div>
 
               <h1 class="font-heading font-bold text-heading text-3xl md:text-4xl mb-3">
                 {{ destination.title }}
               </h1>
 
-              <div class="flex items-center gap-2 mb-6">
+              <!-- Rating — only show if available -->
+              <div v-if="destination.rating" class="flex items-center gap-2 mb-6">
                 <StarIcon class="w-4 h-4 fill-earth text-earth" />
                 <span class="font-semibold text-heading text-sm">{{ destination.rating }}</span>
-                <span class="text-body text-sm">({{ destination.reviewCount }} ulasan)</span>
+                <span v-if="destination.reviewCount" class="text-body text-sm">({{ destination.reviewCount }} ulasan)</span>
               </div>
 
               <div class="prose-custom mb-8">
@@ -245,14 +271,23 @@ watch(() => route.params.slug, (slug) => {
                   </li>
                 </ul>
 
-                <div class="border-t border-border pt-4 mb-5">
-                  <p class="text-xs text-body mb-1">Harga Weekday</p>
-                  <p class="font-heading font-bold text-forest text-xl">{{ formatPrice(destination.price.weekday) }}</p>
-                  <p class="text-xs text-body mt-0.5">{{ destination.price.note }}</p>
+                <!-- Harga -->
+                <div v-if="hargaWeekday || destination.price" class="border-t border-border pt-4 mb-5">
+                  <template v-if="hargaWeekday">
+                    <p class="text-xs text-body mb-1">Harga Weekday</p>
+                    <p class="font-heading font-bold text-forest text-xl">{{ hargaWeekday }}</p>
+                    <p v-if="hargaNote" class="text-xs text-body mt-0.5">{{ hargaNote }}</p>
+                  </template>
+                  <template v-else-if="destination.price">
+                    <p class="text-xs text-body mb-1">Harga</p>
+                    <p class="font-heading font-semibold text-forest text-base">
+                      {{ typeof destination.price === 'string' ? destination.price : 'Lihat detail' }}
+                    </p>
+                  </template>
                 </div>
 
                 <a
-                  :href="`https://wa.me/6285123456789?text=Saya ingin reservasi ${destination.title}`"
+                  :href="`https://wa.me/${waNumber}?text=Saya ingin reservasi ${destination.title}`"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="btn-primary w-full justify-center text-sm"

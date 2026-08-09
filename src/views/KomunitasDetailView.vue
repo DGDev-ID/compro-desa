@@ -92,25 +92,18 @@ watch(() => route.params.slug, (s) => s && loadData(s))
               </div>
 
               <!-- Agenda -->
-              <div class="card-base p-6">
+              <div v-if="community.agenda" class="card-base p-6">
                 <div class="flex items-center gap-2 mb-4">
                   <CalendarIcon class="w-5 h-5 text-forest" />
                   <h2 class="font-heading font-semibold text-heading">Agenda Kegiatan</h2>
                 </div>
-                <div class="divide-y divide-border">
-                  <div
-                    v-for="(ag, i) in community.agenda"
-                    :key="i"
-                    class="py-3 flex justify-between items-start gap-4 text-sm"
-                  >
-                    <span class="font-medium text-heading">{{ ag.event }}</span>
-                    <span class="text-body text-right flex-shrink-0">{{ ag.schedule }}</span>
-                  </div>
+                <div class="text-sm text-body leading-relaxed whitespace-pre-wrap">
+                  {{ community.agenda }}
                 </div>
               </div>
 
               <!-- Gallery -->
-              <div v-if="community.gallery.length > 1">
+              <div v-if="community.gallery && community.gallery.length > 1">
                 <h2 class="font-heading font-semibold text-heading text-lg mb-4">Galeri</h2>
                 <GalleryGrid
                   :images="community.gallery.map((src, i) => ({ id: i, src, thumb: src, alt: community.name }))"

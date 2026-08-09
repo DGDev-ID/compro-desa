@@ -76,7 +76,7 @@ function formatPrice(p) {
               </div>
 
               <!-- Gallery -->
-              <div v-if="umkm.gallery.length > 1">
+              <div v-if="umkm.gallery && umkm.gallery.length > 1">
                 <h2 class="font-heading font-semibold text-heading text-lg mb-4">Galeri</h2>
                 <GalleryGrid
                   :images="umkm.gallery.map((src, i) => ({ id: i, src, thumb: src, alt: umkm.name }))"
@@ -85,7 +85,7 @@ function formatPrice(p) {
               </div>
 
               <!-- Maps -->
-              <div class="card-base overflow-hidden">
+              <div v-if="umkm.coordinates?.lat && umkm.coordinates?.lng" class="card-base overflow-hidden">
                 <div class="p-4 border-b border-border flex items-center gap-2">
                   <MapPinIcon class="w-4 h-4 text-forest" />
                   <h3 class="font-heading font-semibold text-heading text-sm">Lokasi</h3>

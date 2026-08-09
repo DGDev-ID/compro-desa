@@ -20,17 +20,20 @@ const loading = ref(true)
 
 async function loadData() {
   loading.value = true
-  ;[categories.value, umkmList.value] = await Promise.all([
+  const [cats, res] = await Promise.all([
     getUMKMCategories(),
-    getUMKMList({ category: activeCategory.value }),
+    getUMKMList({ category: activeCategory.value, perPage: 20 }),
   ])
+  categories.value = cats
+  umkmList.value = res.data
   loading.value = false
 }
 
 async function setCategory(slug) {
   activeCategory.value = slug
   loading.value = true
-  umkmList.value = await getUMKMList({ category: slug })
+  const res = await getUMKMList({ category: slug, perPage: 20 })
+  umkmList.value = res.data
   loading.value = false
 }
 

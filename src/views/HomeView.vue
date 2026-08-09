@@ -23,14 +23,15 @@ import { getFeaturedCommunities } from '@/services/community.service'
 import { getFeaturedUMKM } from '@/services/umkm.service'
 import { getFeaturedArticles } from '@/services/article.service'
 import { getGalleryPreview } from '@/services/gallery.service'
-import statistics from '@/mock/statistics'
+import { getStats } from '@/services/stat.service'
+import { getBanners } from '@/services/banner.service'
 
 usePageHead({
   title: 'Beranda',
   description: 'Selamat datang di Desa Pandansari — desa wisata alam terpadu di Kecamatan Batang, Jawa Tengah.',
 })
 
-const heroSlides = [
+const heroSlides = ref([
   {
     image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920&q=85',
     caption: 'Alam Asri Desa Pandansari',
@@ -43,7 +44,7 @@ const heroSlides = [
     image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=85',
     caption: 'Hamparan Alam Hijau',
   },
-]
+])
 
 const swiperModules = [Autoplay, Pagination, EffectFade]
 
@@ -52,21 +53,31 @@ const featuredCommunities = ref([])
 const featuredUMKM = ref([])
 const featuredArticles = ref([])
 const galleryImages = ref([])
+const statistics = ref([])
 
 onMounted(async () => {
+  let apiBanners
   ;[
     featuredDestinations.value,
     featuredCommunities.value,
     featuredUMKM.value,
     featuredArticles.value,
     galleryImages.value,
+    statistics.value,
+    apiBanners,
   ] = await Promise.all([
     getFeaturedDestinations(),
     getFeaturedCommunities(3),
     getFeaturedUMKM(3),
     getFeaturedArticles(3),
     getGalleryPreview(6),
+    getStats(),
+    getBanners(),
   ])
+
+  if (apiBanners && apiBanners.length > 0) {
+    heroSlides.value = apiBanners
+  }
 })
 </script>
 

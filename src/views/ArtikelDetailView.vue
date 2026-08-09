@@ -23,7 +23,7 @@ async function loadData(slug) {
   const data = await getArticleBySlug(slug)
   if (!data) { notFound.value = true; loading.value = false; return }
   article.value = data
-  related.value = await getRelatedArticles(slug, data.categorySlug, 3)
+  related.value = await getRelatedArticles(slug, data.categorySlug || data.category?.slug, 3)
   loading.value = false
 }
 

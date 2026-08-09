@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import api from '@/api/axios'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import SectionTitle from '@/components/common/SectionTitle.vue'
 import FaqAccordion from '@/components/common/FaqAccordion.vue'
@@ -24,10 +25,22 @@ async function submitForm() {
   }
   submitting.value = true
   formError.value = ''
-  // Simulate API call – replace with axios call to backend
-  await new Promise((resolve) => setTimeout(resolve, 1200))
-  submitted.value = true
-  submitting.value = false
+  try {
+    // Map frontend fields → backend fields
+    await api.post('/kontak', {
+      nama: formData.value.name,
+      email: formData.value.email,
+      subjek: formData.value.subject || null,
+      pesan: formData.value.message,
+    })
+    submitted.value = true
+  } catch (e) {
+    formError.value =
+      e.response?.data?.message ||
+      'Terjadi kesalahan, silakan coba lagi.'
+  } finally {
+    submitting.value = false
+  }
 }
 
 const faqs = [
