@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import AppBreadcrumb from '@/components/common/AppBreadcrumb.vue'
@@ -26,6 +26,15 @@ async function loadData(slug) {
 
 onMounted(() => loadData(route.params.slug))
 watch(() => route.params.slug, (s) => s && loadData(s))
+
+const mapEmbedUrl = computed(() => {
+  if (!umkm.value) return null
+  const url = umkm.value.googleMapsUrl
+  if (url && url.includes('google.com/maps/embed')) return url
+  // Fallback to searching by name and address for reliable iframe embedding
+  const query = encodeURIComponent(`${umkm.value.name}, ${umkm.value.address || ''}`)
+  return `https://www.google.com/maps?q=${query}&output=embed`
+})
 
 function formatPrice(p) {
   if (!p) return '-'
@@ -85,16 +94,30 @@ function formatPrice(p) {
               </div>
 
               <!-- Maps -->
-              <div v-if="umkm.coordinates?.lat && umkm.coordinates?.lng" class="card-base overflow-hidden">
-                <div class="p-4 border-b border-border flex items-center gap-2">
-                  <MapPinIcon class="w-4 h-4 text-forest" />
-                  <h3 class="font-heading font-semibold text-heading text-sm">Lokasi</h3>
+              <div class="card-base overflow-hidden">
+                <div class="p-4 border-b border-border flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <MapPinIcon class="w-4 h-4 text-forest" />
+                    <h3 class="font-heading font-semibold text-heading text-sm">Lokasi</h3>
+                  </div>
+                  <a
+                    v-if="umkm.googleMapsUrl"
+                    :href="umkm.googleMapsUrl"
+                    target="_blank" rel="noopener noreferrer"
+                    class="text-xs text-primary font-medium hover:underline flex items-center gap-1"
+                  >
+                    Buka di Maps ↗
+                  </a>
                 </div>
-                <div class="aspect-video">
+                <div class="aspect-video relative">
                   <iframe
-                    :src="`https://www.google.com/maps?q=${umkm.coordinates.lat},${umkm.coordinates.lng}&z=15&output=embed`"
+                    v-if="mapEmbedUrl"
+                    :src="mapEmbedUrl"
                     class="w-full h-full" frameborder="0" loading="lazy" allowfullscreen
                   />
+                  <div v-else class="absolute inset-0 flex items-center justify-center bg-background text-sm text-body">
+                    Peta tidak tersedia
+                  </div>
                 </div>
               </div>
             </div>

@@ -74,7 +74,7 @@ watch(() => route.params.slug, (s) => s && loadData(s))
               </div>
 
               <!-- Achievements -->
-              <div class="card-base p-6">
+              <div v-if="community.achievements && community.achievements.length > 0" class="card-base p-6">
                 <div class="flex items-center gap-2 mb-4">
                   <TrophyIcon class="w-5 h-5 text-earth" />
                   <h2 class="font-heading font-semibold text-heading">Prestasi</h2>

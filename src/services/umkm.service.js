@@ -17,19 +17,8 @@ function normalizeUmkm(item) {
     logo: item.logo_url || item.logo,
     category: item.category?.nama || '',
     categorySlug: item.category?.slug || '',
-    // koordinat
-    coordinates: item.coordinate
-      ? (() => {
-          try {
-            const coords = typeof item.coordinate === 'string'
-              ? JSON.parse(item.coordinate)
-              : item.coordinate
-            return coords
-          } catch {
-            return null
-          }
-        })()
-      : null,
+    address: item.alamat || '-',
+    googleMapsUrl: item.google_maps || null,
     // social media (flat fields → object)
     socialMedia: {
       instagram: item.instagram || null,

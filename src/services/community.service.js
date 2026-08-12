@@ -13,7 +13,11 @@ function normalizeCommunity(item) {
     shortDescription: item.deskripsi_singkat || (item.tentang ? item.tentang.slice(0, 150) + '...' : ''),
     founded: item.tahun_berdiri,
     memberCount: item.jumlah_anggota,
-    achievements: item.prestasi || [],
+    achievements: (() => {
+      if (!item.prestasi) return []
+      if (Array.isArray(item.prestasi)) return item.prestasi
+      return item.prestasi.split('\n').filter(Boolean)
+    })(),
     thumbnail: item.thumbnail_url || item.thumbnail,
     category: item.category?.nama || '',
     categorySlug: item.category?.slug || '',

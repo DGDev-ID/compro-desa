@@ -36,11 +36,11 @@ export async function getProfile() {
   })()
 
   // Build government structure from officials (perangkat)
-  const kepala = officials.find((o) => /kepala desa/i.test(o.jabatan))
+  const kepala = officials.find((o) => /^kepala desa/i.test(o.jabatan.trim()))
   const sekretaris = officials.find((o) => /sekretaris/i.test(o.jabatan))
   const staff = officials.filter(
     (o) =>
-      !/kepala desa/i.test(o.jabatan) &&
+      !/^kepala desa/i.test(o.jabatan.trim()) &&
       !/sekretaris/i.test(o.jabatan) &&
       !/kepala dusun|kadus/i.test(o.jabatan),
   )
@@ -80,8 +80,28 @@ export async function getProfile() {
       missions,
     },
 
-    // Awards from profile.penghargaan (array of objects)
-    awards: Array.isArray(profile?.penghargaan) ? profile.penghargaan : [],
+    // Awards from profile.penghargaan
+    awards: (() => {
+      const raw = profile?.penghargaan
+      if (!raw) return []
+      if (Array.isArray(raw)) {
+        return raw.map((r) => {
+          if (typeof r === 'string') {
+            return { icon: '🏆', year: '-', title: r, issuer: '' }
+          }
+          return {
+            icon: '🏆',
+            year: r.tahun || '-',
+            title: r.nama || r.title || '-',
+            issuer: r.pemberi || r.issuer || '',
+          }
+        })
+      }
+      if (typeof raw === 'string') {
+        return raw.split('\n').filter(Boolean).map(r => ({ icon: '🏆', year: '-', title: r, issuer: '' }))
+      }
+      return []
+    })(),
 
     // Government structure from perangkat endpoint
     government: {

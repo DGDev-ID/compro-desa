@@ -66,13 +66,13 @@ onMounted(async () => {
     statistics.value,
     apiBanners,
   ] = await Promise.all([
-    getFeaturedDestinations(),
-    getFeaturedCommunities(3),
-    getFeaturedUMKM(3),
-    getFeaturedArticles(3),
-    getGalleryPreview(6),
-    getStats(),
-    getBanners(),
+    getFeaturedDestinations().catch(() => []),
+    getFeaturedCommunities(3).catch(() => []),
+    getFeaturedUMKM(3).catch(() => []),
+    getFeaturedArticles(3).catch(() => []),
+    getGalleryPreview(6).catch(() => []),
+    getStats().catch(() => []),
+    getBanners().catch(() => []),
   ])
 
   if (apiBanners && apiBanners.length > 0) {

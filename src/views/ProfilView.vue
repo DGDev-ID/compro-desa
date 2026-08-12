@@ -227,21 +227,23 @@ onMounted(async () => {
           </div>
 
           <!-- Dukuh/RT/RW -->
-          <h4 class="font-heading font-semibold text-heading text-center mb-4">Kepala Dusun</h4>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div
-              v-for="(dukuh, i) in profile.government.dukuh"
-              :key="i"
-              class="card-base p-5 text-center"
-              data-aos="fade-up"
-              :data-aos-delay="i * 80"
-            >
-              <div class="w-12 h-12 rounded-full bg-alt flex items-center justify-center mx-auto mb-3 text-xl">🏠</div>
-              <p class="font-heading font-semibold text-heading text-sm">{{ dukuh.name }}</p>
-              <p class="text-forest text-xs font-medium">{{ dukuh.title }}</p>
-              <p class="text-body text-xs mt-1">{{ dukuh.rw }}</p>
+          <template v-if="profile.government.dukuh && profile.government.dukuh.length > 0">
+            <h4 class="font-heading font-semibold text-heading text-center mb-4">Kepala Dusun</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div
+                v-for="(dukuh, i) in profile.government.dukuh"
+                :key="i"
+                class="card-base p-5 text-center"
+                data-aos="fade-up"
+                :data-aos-delay="i * 80"
+              >
+                <div class="w-12 h-12 rounded-full bg-alt flex items-center justify-center mx-auto mb-3 text-xl">🏠</div>
+                <p class="font-heading font-semibold text-heading text-sm">{{ dukuh.name }}</p>
+                <p class="text-forest text-xs font-medium">{{ dukuh.title }}</p>
+                <p class="text-body text-xs mt-1">{{ dukuh.rw }}</p>
+              </div>
             </div>
-          </div>
+          </template>
         </div>
       </section>
 
