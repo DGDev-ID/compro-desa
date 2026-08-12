@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import SectionTitle from '@/components/common/SectionTitle.vue'
@@ -15,6 +15,41 @@ usePageHead({
 
 const profile = ref(null)
 const loading = ref(true)
+
+/**
+ * Convert any YouTube URL to an embed URL.
+ * Handles:
+ *  - https://youtu.be/VIDEO_ID
+ *  - https://www.youtube.com/watch?v=VIDEO_ID
+ *  - https://www.youtube.com/embed/VIDEO_ID  (passthrough)
+ */
+function toYouTubeEmbed(url) {
+  if (!url) return null
+  try {
+    const u = new URL(url)
+    let videoId = null
+
+    if (u.hostname === 'youtu.be') {
+      // https://youtu.be/VIDEO_ID
+      videoId = u.pathname.replace('/', '')
+    } else if (u.hostname.includes('youtube.com')) {
+      if (u.pathname.startsWith('/embed/')) {
+        // already embed — just clean params
+        videoId = u.pathname.replace('/embed/', '')
+      } else {
+        // watch?v=VIDEO_ID
+        videoId = u.searchParams.get('v')
+      }
+    }
+
+    if (videoId) {
+      return `https://www.youtube.com/embed/${videoId}?rel=0`
+    }
+  } catch (_) { /* invalid URL */ }
+  return url // fallback: return as-is
+}
+
+const videoEmbedUrl = computed(() => toYouTubeEmbed(profile.value?.videoProfile))
 
 onMounted(async () => {
   profile.value = await getProfile()
@@ -45,15 +80,16 @@ onMounted(async () => {
       <!-- ─── About ─── -->
       <section class="section-padding bg-white">
         <div class="container-site clearfix">
-          <!-- Right Sidebar (Floated) -->
-          <div class="lg:w-1/2 lg:float-right lg:ml-12 mb-8" data-aos="fade-left" data-aos-delay="100">
+          <!-- Right Sidebar (Floated) with high z-index to stay on top of the text container and remain clickable -->
+          <div class="lg:w-1/2 lg:float-right lg:ml-12 mb-8 relative z-20" data-aos="fade-left" data-aos-delay="100">
             <!-- Video Profile -->
             <div class="rounded-2xl overflow-hidden shadow-soft-lg aspect-video">
               <iframe
-                :src="profile.videoProfile"
+                v-if="videoEmbedUrl"
+                :src="videoEmbedUrl"
                 title="Video Profil Desa Pandansari"
                 frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
                 class="w-full h-full"
               />
@@ -76,8 +112,8 @@ onMounted(async () => {
             </div>
           </div>
 
-          <!-- Main Content -->
-          <div data-aos="fade-right">
+          <!-- Main Content with lower z-index -->
+          <div data-aos="fade-right" class="relative z-10">
             <SectionTitle label="Tentang Desa" title="Pandansari — Alam Asri, Masyarakat Lestari" />
             <div class="text-body leading-relaxed mt-6 whitespace-pre-line text-justify">
               {{ profile.description }}
