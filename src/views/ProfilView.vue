@@ -27,7 +27,7 @@ onMounted(async () => {
     <!-- Hero -->
     <section class="relative h-72 md:h-96 overflow-hidden">
       <img
-        src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=80"
+        src="/pict5.webp"
         alt="Profil Desa Pandansari"
         class="w-full h-full object-cover"
       />

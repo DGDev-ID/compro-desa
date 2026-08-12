@@ -45,8 +45,8 @@ onMounted(loadData)
     <!-- Hero -->
     <section class="relative h-64 md:h-80 overflow-hidden">
       <img
-        src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=1920&q=80"
-        alt="UMKM Pandansari"
+        src="/pict7.webp"
+        alt="UMKM Desa Pandansari"
         class="w-full h-full object-cover"
       />
       <div class="absolute inset-0 hero-overlay flex items-end pb-10">

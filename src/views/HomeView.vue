@@ -157,7 +157,7 @@ onMounted(async () => {
           <div class="grid grid-cols-2 gap-4" data-aos="fade-left" data-aos-delay="100">
             <div class="rounded-2xl overflow-hidden aspect-square shadow-soft-lg">
               <img
-                src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&q=80"
+                src="/pict1.webp"
                 alt="Keindahan alam Pandansari"
                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 loading="lazy"
@@ -165,7 +165,7 @@ onMounted(async () => {
             </div>
             <div class="rounded-2xl overflow-hidden aspect-square shadow-soft-lg mt-6">
               <img
-                src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80"
+                src="/pict2.webp"
                 alt="Pertanian desa"
                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 loading="lazy"
@@ -173,7 +173,7 @@ onMounted(async () => {
             </div>
             <div class="rounded-2xl overflow-hidden aspect-square shadow-soft-lg -mt-6">
               <img
-                src="https://images.unsplash.com/photo-1566004100631-35d015d6a491?w=600&q=80"
+                src="/pict3.webp"
                 alt="Budaya Pandansari"
                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 loading="lazy"
@@ -181,7 +181,7 @@ onMounted(async () => {
             </div>
             <div class="rounded-2xl overflow-hidden aspect-square shadow-soft-lg">
               <img
-                src="https://images.unsplash.com/photo-1530866495561-507c9faab2ed?w=600&q=80"
+                src="/pict4.webp"
                 alt="Wisata tubing"
                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 loading="lazy"

@@ -27,9 +27,9 @@ onMounted(async () => {
     <!-- Hero -->
     <section class="relative h-64 md:h-80 overflow-hidden">
       <img
-        src="https://images.unsplash.com/photo-1566004100631-35d015d6a491?w=1920&q=80"
-        alt="Komunitas Pandansari"
-        class="w-full h-full object-cover"
+        src="/pict8.webp"
+        alt="Komunitas Desa Pandansari"
+        class="w-full h-full object-cover object-[center_35%]"
       />
       <div class="absolute inset-0 hero-overlay flex items-end pb-10">
         <div class="container-site">

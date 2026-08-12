@@ -13,6 +13,7 @@ const quickLinks = [
   { to: '/komunitas', label: 'Komunitas' },
   { to: '/umkm', label: 'Potensi & Ekonomi' },
   { to: '/artikel', label: 'Artikel' },
+  { to: '/e-booklet', label: 'E-Booklet' },
   { to: '/kontak', label: 'Kontak' },
 ]
 
@@ -35,14 +36,13 @@ const currentYear = new Date().getFullYear()
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         <!-- Brand Column -->
         <div class="lg:col-span-1">
-          <RouterLink to="/" class="flex items-center gap-3 mb-4 group">
-            <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-heading font-bold text-xl shadow-soft transition-transform group-hover:scale-105">
-              P
-            </div>
-            <div>
-              <p class="font-heading font-bold text-lg text-white">Pandansari</p>
-              <p class="text-xs text-white/60">Desa Wisata Batang</p>
-            </div>
+          <RouterLink to="/" class="flex flex-col justify-center group mb-6 w-max">
+            <span class="text-[10px] uppercase font-bold tracking-[0.3em] text-primary transition-all duration-300 group-hover:tracking-[0.4em]">
+              Desa Wisata
+            </span>
+            <span class="font-heading font-black text-3xl tracking-tight leading-none mt-1.5 text-white transition-colors duration-300 group-hover:text-gray-200">
+              Pandansari<span class="text-primary">.</span>
+            </span>
           </RouterLink>
           <p class="text-sm text-white/70 leading-relaxed mb-5">
             Desa wisata alam terpadu di Kecamatan Batang. Nikmati keindahan alam, budaya lokal, dan keramahan warga Pandansari.

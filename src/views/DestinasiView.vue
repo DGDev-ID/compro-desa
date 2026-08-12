@@ -38,8 +38,8 @@ const filteredDestinations = computed(() => {
     <!-- Hero -->
     <section class="relative h-64 md:h-80 overflow-hidden">
       <img
-        src="https://images.unsplash.com/photo-1530866495561-507c9faab2ed?w=1920&q=80"
-        alt="Destinasi Wisata Pandansari"
+        src="/pict6.webp"
+        alt="Destinasi Wisata Desa Pandansari"
         class="w-full h-full object-cover"
       />
       <div class="absolute inset-0 hero-overlay flex items-end pb-10">

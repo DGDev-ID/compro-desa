@@ -14,6 +14,7 @@ const navLinks = [
   { to: '/komunitas', label: 'Komunitas' },
   { to: '/umkm', label: 'Potensi & Ekonomi' },
   { to: '/artikel', label: 'Artikel' },
+  { to: '/e-booklet', label: 'E-Booklet' },
   { to: '/kontak', label: 'Kontak' },
 ]
 
@@ -44,27 +45,19 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
     <div class="container-site">
       <nav class="flex items-center justify-between h-18 md:h-20 py-3">
         <!-- Logo -->
-        <RouterLink to="/" class="flex items-center gap-3 group" @click="closeMobile">
-          <div
-            class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-soft transition-transform group-hover:scale-105"
-            style="background-color: #4f6f52"
+        <RouterLink to="/" class="flex flex-col justify-center group py-1" @click="closeMobile">
+          <span 
+            class="text-[10px] uppercase font-bold tracking-[0.3em] transition-all duration-300 group-hover:tracking-[0.4em]"
+            :class="isScrolled ? 'text-forest' : 'text-primary'"
           >
-            P
-          </div>
-          <div class="leading-tight">
-            <p
-              class="font-heading font-bold text-base transition-colors"
-              :class="isScrolled ? 'text-heading' : 'text-white'"
-            >
-              Pandansari
-            </p>
-            <p
-              class="text-xs transition-colors"
-              :class="isScrolled ? 'text-body' : 'text-white/80'"
-            >
-              Desa Wisata Batang
-            </p>
-          </div>
+            Desa Wisata
+          </span>
+          <span 
+            class="font-heading font-black text-2xl md:text-[1.75rem] tracking-tight leading-none mt-1 transition-colors duration-300"
+            :class="isScrolled ? 'text-heading group-hover:text-forest' : 'text-white group-hover:text-primary'"
+          >
+            Pandansari<span class="text-primary">.</span>
+          </span>
         </RouterLink>
 
         <!-- Desktop Menu -->
@@ -75,7 +68,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
               :class="[
                 'px-3 py-2 rounded-lg text-sm font-medium font-heading transition-colors duration-200 relative',
                 isActive(link)
-                  ? 'text-forest bg-primary/20'
+                  ? (isScrolled ? 'text-forest bg-primary/15 font-semibold' : 'text-white bg-white/20 font-semibold')
                   : isScrolled
                     ? 'text-heading hover:text-forest hover:bg-alt'
                     : 'text-white/90 hover:text-white hover:bg-white/10',

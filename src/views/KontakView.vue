@@ -72,8 +72,8 @@ const faqs = [
     <!-- Hero -->
     <section class="relative h-64 md:h-72 overflow-hidden">
       <img
-        src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920&q=80"
-        alt="Kontak Pandansari"
+        src="/pict10.webp"
+        alt="Kontak Desa Pandansari"
         class="w-full h-full object-cover"
       />
       <div class="absolute inset-0 hero-overlay flex items-end pb-10">
