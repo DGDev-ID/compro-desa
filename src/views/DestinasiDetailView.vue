@@ -204,15 +204,42 @@ watch(() => route.params.slug, (slug) => {
 
               <!-- Informasi Paket -->
               <div v-if="destination.packages && destination.packages.length" class="card-base p-6 mb-6">
-                <h3 class="font-heading font-semibold text-heading mb-4">Informasi Paket</h3>
-                <div v-for="(pkg, idx) in destination.packages" :key="idx" class="mb-4 last:mb-0">
-                  <p class="font-medium text-heading mb-2">Harga: {{ pkg.price }}</p>
-                  <ul class="list-none text-sm text-body space-y-1">
-                    <li v-for="item in pkg.includes" :key="item" class="flex gap-2">
-                      <CheckIcon class="w-4 h-4 text-forest flex-shrink-0 mt-0.5" />
+                <h3 class="font-heading font-semibold text-heading mb-4">Paket Wisata</h3>
+                <div
+                  v-for="(pkg, idx) in destination.packages"
+                  :key="idx"
+                  class="mb-5 last:mb-0 pb-5 last:pb-0 border-b last:border-b-0 border-border"
+                >
+                  <!-- Package name -->
+                  <h4 class="font-heading font-semibold text-heading text-sm mb-2">
+                    {{ pkg.nama_paket }}
+                  </h4>
+
+                  <!-- Price -->
+                  <p class="font-bold text-forest text-base mb-1">{{ pkg.harga }}</p>
+
+                  <!-- Min/max pax -->
+                  <p v-if="pkg.min_orang" class="text-xs text-body mb-2">
+                    Min.
+                    {{ pkg.min_orang }} orang
+                    <template v-if="pkg.maks_orang"> — Maks. {{ pkg.maks_orang }} orang</template>
+                  </p>
+
+                  <!-- Fasilitas / includes -->
+                  <ul v-if="pkg.fasilitas && pkg.fasilitas.length" class="flex flex-wrap gap-1.5">
+                    <li
+                      v-for="item in pkg.fasilitas"
+                      :key="item"
+                      class="text-xs bg-alt border border-border rounded-full px-2.5 py-0.5 text-body"
+                    >
                       {{ item }}
                     </li>
                   </ul>
+
+                  <!-- Notes -->
+                  <p v-if="pkg.keterangan" class="text-xs text-body mt-2 italic">
+                    {{ pkg.keterangan }}
+                  </p>
                 </div>
               </div>
 

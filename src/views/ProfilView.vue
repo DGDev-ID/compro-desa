@@ -44,42 +44,43 @@ onMounted(async () => {
     <div v-if="!loading && profile">
       <!-- ─── About ─── -->
       <section class="section-padding bg-white">
-        <div class="container-site">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
-            <div data-aos="fade-right">
-              <SectionTitle label="Tentang Desa" title="Pandansari — Alam Asri, Masyarakat Lestari" />
-              <p class="text-body leading-relaxed mb-4">{{ profile.description }}</p>
-              <p class="text-body leading-relaxed">{{ profile.shortDescription }}</p>
-
-              <!-- Office Hours -->
-              <div class="mt-8 bg-alt rounded-2xl p-5 border border-border">
-                <h4 class="font-heading font-semibold text-heading text-sm mb-3">🕐 Jam Operasional Kantor Desa</h4>
-                <ul class="space-y-1.5">
-                  <li
-                    v-for="h in profile.officeHours"
-                    :key="h.day"
-                    class="flex justify-between text-sm"
-                  >
-                    <span class="text-body">{{ h.day }}</span>
-                    <span class="font-medium text-heading">{{ h.hours }}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
+        <div class="container-site clearfix">
+          <!-- Right Sidebar (Floated) -->
+          <div class="lg:w-1/2 lg:float-right lg:ml-12 mb-8" data-aos="fade-left" data-aos-delay="100">
             <!-- Video Profile -->
-            <div data-aos="fade-left" data-aos-delay="100">
-              <div class="rounded-2xl overflow-hidden shadow-soft-lg aspect-video">
-                <iframe
-                  :src="profile.videoProfile"
-                  title="Video Profil Desa Pandansari"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  class="w-full h-full"
-                />
-              </div>
-              <p class="text-center text-sm text-body mt-3 italic">Video Profil Resmi Desa Pandansari</p>
+            <div class="rounded-2xl overflow-hidden shadow-soft-lg aspect-video">
+              <iframe
+                :src="profile.videoProfile"
+                title="Video Profil Desa Pandansari"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                class="w-full h-full"
+              />
+            </div>
+            <p class="text-center text-sm text-body mt-3 italic mb-8">Video Profil Resmi Desa Pandansari</p>
+
+            <!-- Office Hours -->
+            <div class="bg-alt rounded-2xl p-5 border border-border">
+              <h4 class="font-heading font-semibold text-heading text-sm mb-3">🕐 Jam Operasional Kantor Desa</h4>
+              <ul class="space-y-1.5">
+                <li
+                  v-for="h in profile.officeHours"
+                  :key="h.day"
+                  class="flex justify-between text-sm"
+                >
+                  <span class="text-body">{{ h.day }}</span>
+                  <span class="font-medium text-heading">{{ h.hours }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Main Content -->
+          <div data-aos="fade-right">
+            <SectionTitle label="Tentang Desa" title="Pandansari — Alam Asri, Masyarakat Lestari" />
+            <div class="text-body leading-relaxed mt-6 whitespace-pre-line text-justify">
+              {{ profile.description }}
             </div>
           </div>
         </div>
