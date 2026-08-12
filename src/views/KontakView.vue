@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import api from '@/api/axios'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import SectionTitle from '@/components/common/SectionTitle.vue'
@@ -7,6 +7,7 @@ import FaqAccordion from '@/components/common/FaqAccordion.vue'
 import CtaSection from '@/components/common/CtaSection.vue'
 import { usePageHead } from '@/composables/usePageHead'
 import { MapPinIcon, PhoneIcon, MailIcon, ClockIcon, MessageCircleIcon, CheckIcon } from '@lucide/vue'
+import { getContactInfo } from '@/services/contact.service'
 
 usePageHead({
   title: 'Kontak',
@@ -17,6 +18,29 @@ const formData = ref({ name: '', email: '', phone: '', subject: '', message: '' 
 const submitting = ref(false)
 const submitted = ref(false)
 const formError = ref('')
+
+// Contact info from backend
+const contact = ref(null)
+
+onMounted(async () => {
+  contact.value = await getContactInfo()
+})
+
+const waHref = computed(() => {
+  if (!contact.value?.whatsapp) return '#'
+  const digits = contact.value.whatsapp.replace(/\D/g, '')
+  return `https://wa.me/${digits}`
+})
+
+const phoneHref = computed(() => {
+  if (!contact.value?.phone) return '#'
+  return `tel:${contact.value.phone.replace(/\s/g, '')}`
+})
+
+const mailHref = computed(() => {
+  if (!contact.value?.email) return '#'
+  return `mailto:${contact.value.email}`
+})
 
 async function submitForm() {
   if (!formData.value.name || !formData.value.email || !formData.value.message) {
@@ -46,7 +70,7 @@ async function submitForm() {
 const faqs = [
   {
     question: 'Bagaimana cara reservasi wisata Tubing Pandansari?',
-    answer: 'Anda bisa melakukan reservasi melalui WhatsApp di nomor 6285123456789 atau langsung datang ke lokasi. Untuk grup lebih dari 20 orang, pemesanan minimal H-2.',
+    answer: 'Anda bisa melakukan reservasi melalui WhatsApp atau langsung datang ke lokasi. Untuk grup lebih dari 20 orang, pemesanan minimal H-2.',
   },
   {
     question: 'Apakah ada penginapan di sekitar Desa Pandansari?',
@@ -103,27 +127,27 @@ const faqs = [
                 </div>
                 <div>
                   <p class="font-heading font-semibold text-heading text-sm mb-0.5">Alamat</p>
-                  <p class="text-body text-sm">Kantor Desa Pandansari, Kecamatan Batang, Kabupaten Batang, Jawa Tengah 51212</p>
+                  <p class="text-body text-sm">{{ contact?.address || 'Kantor Desa Pandansari, Kecamatan Batang, Kabupaten Batang, Jawa Tengah' }}</p>
                 </div>
               </div>
 
-              <div class="flex gap-4">
+              <div v-if="contact?.phone" class="flex gap-4">
                 <div class="w-12 h-12 rounded-2xl bg-alt flex items-center justify-center flex-shrink-0">
                   <PhoneIcon class="w-5 h-5 text-forest" />
                 </div>
                 <div>
                   <p class="font-heading font-semibold text-heading text-sm mb-0.5">Telepon</p>
-                  <a href="tel:+62285123456" class="text-body text-sm hover:text-forest transition-colors">+62 285 123456</a>
+                  <a :href="phoneHref" class="text-body text-sm hover:text-forest transition-colors">{{ contact.phone }}</a>
                 </div>
               </div>
 
-              <div class="flex gap-4">
+              <div v-if="contact?.email" class="flex gap-4">
                 <div class="w-12 h-12 rounded-2xl bg-alt flex items-center justify-center flex-shrink-0">
                   <MailIcon class="w-5 h-5 text-forest" />
                 </div>
                 <div>
                   <p class="font-heading font-semibold text-heading text-sm mb-0.5">Email</p>
-                  <a href="mailto:info@pandansari.desa.id" class="text-body text-sm hover:text-forest transition-colors">info@pandansari.desa.id</a>
+                  <a :href="mailHref" class="text-body text-sm hover:text-forest transition-colors">{{ contact.email }}</a>
                 </div>
               </div>
 
@@ -133,7 +157,8 @@ const faqs = [
                 </div>
                 <div>
                   <p class="font-heading font-semibold text-heading text-sm mb-1">Jam Operasional</p>
-                  <ul class="space-y-0.5 text-sm text-body">
+                  <p v-if="contact?.officeHours" class="text-body text-sm whitespace-pre-line">{{ contact.officeHours }}</p>
+                  <ul v-else class="space-y-0.5 text-sm text-body">
                     <li>Senin – Jumat: 08.00 – 16.00 WIB</li>
                     <li>Sabtu: 08.00 – 12.00 WIB</li>
                     <li>Minggu & Libur: Tutup</li>
@@ -144,7 +169,7 @@ const faqs = [
 
             <!-- WhatsApp CTA -->
             <a
-              href="https://wa.me/6285123456789"
+              :href="waHref"
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center gap-3 bg-success text-white font-semibold font-heading px-6 py-3.5 rounded-2xl hover:bg-success/90 transition-colors shadow-soft"
@@ -156,6 +181,15 @@ const faqs = [
             <!-- Google Maps -->
             <div class="mt-8 rounded-2xl overflow-hidden shadow-soft-lg aspect-video">
               <iframe
+                v-if="contact?.googleMapsEmbed"
+                :src="contact.googleMapsEmbed"
+                class="w-full h-full"
+                frameborder="0"
+                loading="lazy"
+                allowfullscreen
+              />
+              <iframe
+                v-else
                 src="https://www.google.com/maps?q=-6.9105,109.7344&z=15&output=embed"
                 class="w-full h-full"
                 frameborder="0"
