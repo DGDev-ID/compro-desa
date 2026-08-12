@@ -28,11 +28,6 @@ function formatPrice(price) {
     <div class="p-5 flex flex-col flex-1">
       <div class="flex items-start justify-between gap-2 mb-2">
         <AppBadge :label="destination.category" variant="primary" />
-        <div class="flex items-center gap-1 text-xs text-body flex-shrink-0">
-          <StarIcon class="w-3.5 h-3.5 fill-earth text-earth" />
-          <span class="font-medium">{{ destination.rating }}</span>
-          <span class="text-body/60">({{ destination.reviewCount }})</span>
-        </div>
       </div>
 
       <h3 class="font-heading font-semibold text-heading text-base mb-1.5 line-clamp-1">

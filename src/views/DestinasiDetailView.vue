@@ -173,16 +173,9 @@ watch(() => route.params.slug, (slug) => {
                 </template>
               </div>
 
-              <h1 class="font-heading font-bold text-heading text-3xl md:text-4xl mb-3">
+              <h1 class="font-heading font-bold text-heading text-3xl md:text-4xl mb-6">
                 {{ destination.title }}
               </h1>
-
-              <!-- Rating — only show if available -->
-              <div v-if="destination.rating" class="flex items-center gap-2 mb-6">
-                <StarIcon class="w-4 h-4 fill-earth text-earth" />
-                <span class="font-semibold text-heading text-sm">{{ destination.rating }}</span>
-                <span v-if="destination.reviewCount" class="text-body text-sm">({{ destination.reviewCount }} ulasan)</span>
-              </div>
 
               <div class="prose-custom mb-8">
                 <p

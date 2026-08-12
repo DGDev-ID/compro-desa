@@ -91,7 +91,7 @@ onMounted(async () => {
           <SectionTitle label="Sejarah" title="Asal Usul Desa Pandansari" centered />
           <div class="prose prose-green max-w-none" data-aos="fade-up">
             <p
-              v-for="(paragraph, i) in profile.about.history.split('\n\n')"
+              v-for="(paragraph, i) in (profile.about.history || '').split('\n\n')"
               :key="i"
               class="text-body leading-relaxed mb-4"
             >
@@ -145,7 +145,7 @@ onMounted(async () => {
           <SectionTitle label="Pemerintahan" title="Struktur Pemerintahan Desa" centered />
 
           <!-- Kepala Desa -->
-          <div class="flex justify-center mb-8" data-aos="fade-up">
+          <div v-if="profile.government.kepala" class="flex justify-center mb-8" data-aos="fade-up">
             <div class="card-base p-6 flex flex-col items-center text-center w-64 shadow-soft-lg">
               <img
                 :src="profile.government.kepala.photo"
@@ -161,6 +161,7 @@ onMounted(async () => {
           <!-- Sekretaris + Staff -->
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
             <div
+              v-if="profile.government.sekretaris"
               class="card-base p-4 flex flex-col items-center text-center"
               data-aos="fade-up"
               data-aos-delay="50"

@@ -68,7 +68,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
               :class="[
                 'px-3 py-2 rounded-lg text-sm font-medium font-heading transition-colors duration-200 relative',
                 isActive(link)
-                  ? (isScrolled ? 'text-forest bg-primary/15 font-semibold' : 'text-white bg-white/20 font-semibold')
+                  ? 'text-forest bg-primary/20'
                   : isScrolled
                     ? 'text-heading hover:text-forest hover:bg-alt'
                     : 'text-white/90 hover:text-white hover:bg-white/10',
