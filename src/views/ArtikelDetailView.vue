@@ -106,7 +106,7 @@ watch(() => route.params.slug, (s) => { if (s) { loadData(s); window.scrollTo({ 
             <p
               v-for="(paragraph, i) in article.content.split('\n\n')"
               :key="i"
-              class="text-body leading-relaxed text-base"
+              class="text-body leading-relaxed text-base whitespace-pre-line text-justify"
             >
               {{ paragraph }}
             </p>

@@ -28,7 +28,8 @@ import { getBanners } from '@/services/banner.service'
 
 usePageHead({
   title: 'Beranda',
-  description: 'Selamat datang di Desa Pandansari — desa wisata alam terpadu di Kecamatan Batang, Jawa Tengah.',
+  description:
+    'Selamat datang di Desa Pandansari — desa wisata alam terpadu di Kecamatan Batang, Jawa Tengah.',
 })
 
 const heroSlides = ref([
@@ -110,30 +111,35 @@ onMounted(async () => {
       <div class="absolute inset-0 z-10 flex items-center pointer-events-none">
         <div class="container-site w-full">
           <div class="max-w-2xl pointer-events-auto" data-aos="fade-up">
-            <span class="inline-block bg-primary/20 backdrop-blur-sm text-white text-xs font-semibold font-heading tracking-widest uppercase px-4 py-1.5 rounded-full border border-white/20 mb-5">
-              🌿 Desa Wisata Terbaik Jawa Tengah 2024
+            <span
+              class="inline-block bg-primary/20 backdrop-blur-sm text-white text-xs font-semibold font-heading tracking-widest uppercase px-4 py-1.5 rounded-full border border-white/20 mb-5"
+            >
+              🌿 DESA WISATA TERBAIK DI BATANG
             </span>
-            <h1 class="font-heading font-extrabold text-white text-4xl sm:text-5xl lg:text-6xl leading-tight mb-5">
+            <h1
+              class="font-heading font-extrabold text-white text-4xl sm:text-5xl lg:text-6xl leading-tight mb-5"
+            >
               Selamat Datang di<br />
               <span class="text-primary">Desa Pandansari</span>
             </h1>
             <p class="text-white/85 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
-              Nikmati keindahan alam sungai, bukit hijau, dan kearifan lokal Desa Pandansari — pengalaman wisata yang tak terlupakan untuk keluarga Anda.
+              Nikmati keindahan alam sungai, bukit hijau, dan kearifan lokal Desa Pandansari —
+              pengalaman wisata yang tak terlupakan untuk keluarga Anda.
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
               <RouterLink to="/destinasi" class="btn-primary text-sm">
                 🗺️ Jelajahi Destinasi
               </RouterLink>
-              <RouterLink to="/kontak" class="btn-outline-white text-sm">
-                Hubungi Kami
-              </RouterLink>
+              <RouterLink to="/kontak" class="btn-outline-white text-sm"> Hubungi Kami </RouterLink>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Scroll indicator -->
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-white/60 text-xs animate-bounce">
+      <div
+        class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-white/60 text-xs animate-bounce"
+      >
         <span>Scroll</span>
         <div class="w-px h-8 bg-white/40"></div>
       </div>
@@ -193,7 +199,7 @@ onMounted(async () => {
     </section>
 
     <!-- ══════════════════════════════ POTENSI DESA ══════════════════════════════ -->
-    <section class="section-padding" style="background-color: #EEF5E3;">
+    <section class="section-padding" style="background-color: #eef5e3">
       <div class="container-site">
         <SectionTitle
           label="Potensi"
@@ -203,20 +209,42 @@ onMounted(async () => {
         />
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
           <div class="card-base p-6 hover:shadow-soft-xl transition-all duration-300">
-            <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2"><span class="text-2xl">🌊</span> Wisata Alam</h3>
-            <p class="text-body leading-relaxed">Nikmati keindahan alam Desa Wisata Pandansari melalui berbagai destinasi wisata yang menawarkan pengalaman rekreasi, petualangan, dan suasana pedesaan yang asri.</p>
+            <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2">
+              <span class="text-2xl">🌊</span> Wisata Alam
+            </h3>
+            <p class="text-body leading-relaxed">
+              Nikmati keindahan alam Desa Wisata Pandansari melalui berbagai destinasi wisata yang
+              menawarkan pengalaman rekreasi, petualangan, dan suasana pedesaan yang asri.
+            </p>
           </div>
           <div class="card-base p-6 hover:shadow-soft-xl transition-all duration-300">
-            <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2"><span class="text-2xl">🏕️</span> Aktivitas Wisata</h3>
-            <p class="text-body leading-relaxed">Beragam aktivitas dapat dinikmati oleh wisatawan, mulai dari river tubing, outbound, camping, memancing, hingga bersantai di tepi sungai.</p>
+            <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2">
+              <span class="text-2xl">🏕️</span> Aktivitas Wisata
+            </h3>
+            <p class="text-body leading-relaxed">
+              Beragam aktivitas dapat dinikmati oleh wisatawan, mulai dari river tubing, outbound,
+              camping, memancing, hingga bersantai di tepi sungai.
+            </p>
           </div>
           <div class="card-base p-6 hover:shadow-soft-xl transition-all duration-300">
-            <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2"><span class="text-2xl">🛍️</span> UMKM & Ekonomi Lokal</h3>
-            <p class="text-body leading-relaxed">Desa Pandansari memiliki potensi ekonomi lokal yang didukung oleh UMKM makanan khas Opak, UMKM Desa Wisata, pertanian, perikanan, serta Pasar Pandansari yang menjadi bagian dari kehidupan masyarakat.</p>
+            <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2">
+              <span class="text-2xl">🛍️</span> UMKM & Ekonomi Lokal
+            </h3>
+            <p class="text-body leading-relaxed">
+              Desa Pandansari memiliki potensi ekonomi lokal yang didukung oleh UMKM makanan khas
+              Opak, UMKM Desa Wisata, pertanian, perikanan, serta Pasar Pandansari yang menjadi
+              bagian dari kehidupan masyarakat.
+            </p>
           </div>
           <div class="card-base p-6 hover:shadow-soft-xl transition-all duration-300">
-            <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2"><span class="text-2xl">🤝</span> Komunitas Aktif</h3>
-            <p class="text-body leading-relaxed">Berbagai komunitas masyarakat berperan aktif dalam mendukung kegiatan sosial, olahraga, pelestarian lingkungan, serta pengembangan Desa Wisata Pandansari sehingga tercipta desa yang dinamis dan harmonis.</p>
+            <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2">
+              <span class="text-2xl">🤝</span> Komunitas Aktif
+            </h3>
+            <p class="text-body leading-relaxed">
+              Berbagai komunitas masyarakat berperan aktif dalam mendukung kegiatan sosial,
+              olahraga, pelestarian lingkungan, serta pengembangan Desa Wisata Pandansari sehingga
+              tercipta desa yang dinamis dan harmonis.
+            </p>
           </div>
         </div>
       </div>
@@ -231,7 +259,10 @@ onMounted(async () => {
             title="Jelajahi Keindahan Pandansari"
             description="Dari petualangan air hingga bukit panoramik — setiap sudut Pandansari menyimpan cerita indah."
           />
-          <RouterLink to="/destinasi" class="btn-outline text-sm shrink-0 self-start md:self-end mb-12 md:mb-0">
+          <RouterLink
+            to="/destinasi"
+            class="btn-outline text-sm shrink-0 self-start md:self-end mb-12 md:mb-0"
+          >
             Lihat Semua →
           </RouterLink>
         </div>
@@ -248,7 +279,7 @@ onMounted(async () => {
     </section>
 
     <!-- ══════════════════════════════ COMMUNITIES ══════════════════════════════ -->
-    <section class="section-padding" style="background-color: #EEF5E3;">
+    <section class="section-padding" style="background-color: #eef5e3">
       <div class="container-site">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
           <SectionTitle
@@ -256,7 +287,10 @@ onMounted(async () => {
             title="Semangat Gotong Royong Warga"
             description="Komunitas-komunitas dinamis yang menjadi kekuatan sosial dan budaya Desa Pandansari."
           />
-          <RouterLink to="/komunitas" class="btn-outline text-sm shrink-0 self-start md:self-end mb-12 md:mb-0">
+          <RouterLink
+            to="/komunitas"
+            class="btn-outline text-sm shrink-0 self-start md:self-end mb-12 md:mb-0"
+          >
             Semua Komunitas →
           </RouterLink>
         </div>
@@ -281,7 +315,10 @@ onMounted(async () => {
             title="Produk Unggulan Desa"
             description="UMKM lokal yang menjadi motor penggerak perekonomian Desa Pandansari."
           />
-          <RouterLink to="/umkm" class="btn-outline text-sm shrink-0 self-start md:self-end mb-12 md:mb-0">
+          <RouterLink
+            to="/umkm"
+            class="btn-outline text-sm shrink-0 self-start md:self-end mb-12 md:mb-0"
+          >
             Semua UMKM →
           </RouterLink>
         </div>
@@ -298,7 +335,7 @@ onMounted(async () => {
     </section>
 
     <!-- ══════════════════════════════ ARTICLES ══════════════════════════════ -->
-    <section class="section-padding" style="background-color: #EEF5E3;">
+    <section class="section-padding" style="background-color: #eef5e3">
       <div class="container-site">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
           <SectionTitle
@@ -306,7 +343,10 @@ onMounted(async () => {
             title="Berita & Informasi Desa"
             description="Kabar terkini, kegiatan, dan cerita inspiratif dari Desa Pandansari."
           />
-          <RouterLink to="/artikel" class="btn-outline text-sm shrink-0 self-start md:self-end mb-12 md:mb-0">
+          <RouterLink
+            to="/artikel"
+            class="btn-outline text-sm shrink-0 self-start md:self-end mb-12 md:mb-0"
+          >
             Semua Artikel →
           </RouterLink>
         </div>

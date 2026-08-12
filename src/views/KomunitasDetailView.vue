@@ -70,7 +70,7 @@ watch(() => route.params.slug, (s) => s && loadData(s))
               <!-- Description -->
               <div class="card-base p-6">
                 <h2 class="font-heading font-semibold text-heading text-lg mb-3">Tentang Komunitas</h2>
-                <p class="text-body leading-relaxed">{{ community.description }}</p>
+                <p class="text-body leading-relaxed whitespace-pre-line text-justify">{{ community.description }}</p>
               </div>
 
               <!-- Achievements -->

@@ -181,7 +181,7 @@ watch(() => route.params.slug, (slug) => {
                 <p
                   v-for="(para, i) in destination.description.split('\n\n')"
                   :key="i"
-                  class="text-body leading-relaxed mb-4"
+                  class="text-body leading-relaxed mb-4 whitespace-pre-line text-justify"
                 >
                   {{ para }}
                 </p>

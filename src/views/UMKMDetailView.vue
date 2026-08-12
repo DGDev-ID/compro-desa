@@ -81,7 +81,7 @@ function formatPrice(p) {
             <div class="lg:col-span-2 space-y-8">
               <div class="card-base p-6">
                 <h2 class="font-heading font-semibold text-heading text-lg mb-3">Tentang Usaha</h2>
-                <p class="text-body leading-relaxed">{{ umkm.description }}</p>
+                <p class="text-body leading-relaxed whitespace-pre-line text-justify">{{ umkm.description }}</p>
               </div>
 
               <!-- Gallery -->
