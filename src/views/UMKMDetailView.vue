@@ -72,7 +72,17 @@ const businessInfos = computed(() => {
     infos.push(...umkm.value.businessInfos)
   }
 
-  return infos
+  // Buang entri yang tidak punya isi sama sekali (semua field kosong/'-')
+  return infos.filter((info) => {
+    const hasValue = (v) => v && v.toString().trim() !== '' && v.toString().trim() !== '-'
+    return (
+      hasValue(info.owner) ||
+      hasValue(info.established) ||
+      hasValue(info.address) ||
+      hasValue(info.phone) ||
+      hasValue(info.instagram)
+    )
+  })
 })
 
 function formatPrice(p) {
@@ -185,14 +195,7 @@ function formatPrice(p) {
             <div>
               <div class="sticky top-24 space-y-6">
                 <div v-for="(info, index) in businessInfos" :key="index" class="card-base p-6">
-                  <h3 class="font-heading font-semibold text-heading mb-4">
-                    <!-- {{
-                      info.isMain
-                        ? 'Informasi Usaha'
-                        : `Informasi Tambahan ${businessInfos.length > 2 ? '#' + index : ''}`.trim()
-                    }} -->
-                    Informasi Usaha
-                  </h3>
+                  <h3 class="font-heading font-semibold text-heading mb-4">Informasi Usaha</h3>
                   <ul class="space-y-3.5 text-sm mb-5">
                     <li v-if="info.owner" class="flex gap-3">
                       <UserIcon class="w-4 h-4 text-forest flex-shrink-0 mt-0.5" />
