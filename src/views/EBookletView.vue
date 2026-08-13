@@ -77,9 +77,9 @@ onMounted(async () => {
     <!-- ─── Hero ─── -->
     <section class="relative h-64 md:h-80 overflow-hidden">
       <img
-        src="/pict11.webp"
+        src="/pict12.webp"
         alt="E-Booklet Desa Pandansari"
-        class="w-full h-full object-cover object-[center_65%]"
+        class="w-full h-full object-cover object-[center_40%]"
       />
       <div class="absolute inset-0 hero-overlay flex items-end pb-10">
         <div class="container-site">
