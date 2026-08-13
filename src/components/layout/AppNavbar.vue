@@ -7,6 +7,11 @@ const route = useRoute()
 const isScrolled = ref(false)
 const mobileOpen = ref(false)
 
+// Navbar solid di semua halaman KECUALI Home (path '/') sebelum di-scroll.
+// Home tetap punya efek transparan -> solid saat scroll,
+// semua halaman lain (detail, list, dll) langsung solid dari awal.
+const isSolid = computed(() => isScrolled.value || route.path !== '/')
+
 const navLinks = [
   { to: '/', label: 'Home', exact: true },
   { to: '/profil', label: 'Profil Desa' },
@@ -39,22 +44,26 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   <header
     :class="[
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-soft' : 'bg-transparent',
+      isSolid ? 'bg-white/95 backdrop-blur-md shadow-soft' : 'bg-transparent',
     ]"
   >
     <div class="container-site">
       <nav class="flex items-center justify-between h-18 md:h-20 py-3">
         <!-- Logo -->
         <RouterLink to="/" class="flex flex-col justify-center group py-1" @click="closeMobile">
-          <span 
+          <span
             class="text-[10px] uppercase font-bold tracking-[0.3em] transition-all duration-300 group-hover:tracking-[0.4em]"
-            :class="isScrolled ? 'text-forest' : 'text-primary'"
+            :class="isSolid ? 'text-forest' : 'text-primary'"
           >
             Desa Wisata
           </span>
-          <span 
+          <span
             class="font-heading font-black text-2xl md:text-[1.75rem] tracking-tight leading-none mt-1 transition-colors duration-300"
-            :class="isScrolled ? 'text-heading group-hover:text-forest' : 'text-white group-hover:text-primary'"
+            :class="
+              isSolid
+                ? 'text-heading group-hover:text-forest'
+                : 'text-white group-hover:text-primary'
+            "
           >
             Pandansari<span class="text-primary">.</span>
           </span>
@@ -69,7 +78,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
                 'px-3 py-2 rounded-lg text-sm font-medium font-heading transition-colors duration-200 relative',
                 isActive(link)
                   ? 'text-forest bg-primary/20'
-                  : isScrolled
+                  : isSolid
                     ? 'text-heading hover:text-forest hover:bg-alt'
                     : 'text-white/90 hover:text-white hover:bg-white/10',
               ]"
@@ -87,7 +96,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
         <!-- Mobile Toggle -->
         <button
           class="lg:hidden p-2 rounded-lg transition-colors"
-          :class="isScrolled ? 'text-heading hover:bg-alt' : 'text-white hover:bg-white/10'"
+          :class="isSolid ? 'text-heading hover:bg-alt' : 'text-white hover:bg-white/10'"
           @click="mobileOpen = !mobileOpen"
           aria-label="Toggle menu"
         >

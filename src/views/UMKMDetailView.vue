@@ -8,7 +8,14 @@ import GalleryGrid from '@/components/common/GalleryGrid.vue'
 import CtaSection from '@/components/common/CtaSection.vue'
 import { usePageHead } from '@/composables/usePageHead'
 import { getUMKMBySlug } from '@/services/umkm.service'
-import { MapPinIcon, PhoneIcon, CheckIcon, ShoppingBagIcon, UserIcon, CalendarIcon } from '@lucide/vue'
+import {
+  MapPinIcon,
+  PhoneIcon,
+  CheckIcon,
+  ShoppingBagIcon,
+  UserIcon,
+  CalendarIcon,
+} from '@lucide/vue'
 
 const route = useRoute()
 const umkm = ref(null)
@@ -19,13 +26,20 @@ async function loadData(slug) {
   loading.value = true
   notFound.value = false
   const data = await getUMKMBySlug(slug)
-  if (!data) { notFound.value = true; loading.value = false; return }
+  if (!data) {
+    notFound.value = true
+    loading.value = false
+    return
+  }
   umkm.value = data
   loading.value = false
 }
 
 onMounted(() => loadData(route.params.slug))
-watch(() => route.params.slug, (s) => s && loadData(s))
+watch(
+  () => route.params.slug,
+  (s) => s && loadData(s),
+)
 
 const mapEmbedUrl = computed(() => {
   if (!umkm.value) return null
@@ -38,9 +52,9 @@ const mapEmbedUrl = computed(() => {
 
 const businessInfos = computed(() => {
   if (!umkm.value) return []
-  
+
   const infos = []
-  
+
   // 1. Informasi Utama (dari field dasar)
   if (umkm.value.owner || umkm.value.address || umkm.value.phone || umkm.value.established) {
     infos.push({
@@ -49,31 +63,40 @@ const businessInfos = computed(() => {
       established: umkm.value.established,
       address: umkm.value.address,
       phone: umkm.value.phone,
-      instagram: umkm.value.socialMedia?.instagram
+      instagram: umkm.value.socialMedia?.instagram,
     })
   }
-  
+
   // 2. Informasi Tambahan (dari dashboard 'business_infos')
   if (umkm.value.businessInfos && umkm.value.businessInfos.length > 0) {
     infos.push(...umkm.value.businessInfos)
   }
-  
+
   return infos
 })
 
 function formatPrice(p) {
   if (!p) return '-'
-  return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(p)
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    maximumFractionDigits: 0,
+  }).format(p)
 }
 </script>
 
 <template>
   <DefaultLayout>
     <div v-if="loading" class="pt-24 min-h-screen flex items-center justify-center">
-      <div class="w-12 h-12 rounded-full border-4 border-primary border-t-transparent animate-spin" />
+      <div
+        class="w-12 h-12 rounded-full border-4 border-primary border-t-transparent animate-spin"
+      />
     </div>
 
-    <div v-else-if="notFound" class="pt-24 min-h-screen flex items-center justify-center text-center">
+    <div
+      v-else-if="notFound"
+      class="pt-24 min-h-screen flex items-center justify-center text-center"
+    >
       <div>
         <span class="text-6xl mb-4 block">🏪</span>
         <h2 class="font-heading font-bold text-heading text-2xl mb-2">UMKM tidak ditemukan</h2>
@@ -106,14 +129,18 @@ function formatPrice(p) {
             <div class="lg:col-span-2 space-y-8">
               <div class="card-base p-6">
                 <h2 class="font-heading font-semibold text-heading text-lg mb-3">Tentang Usaha</h2>
-                <p class="text-body leading-relaxed whitespace-pre-line text-justify">{{ umkm.description }}</p>
+                <p class="text-body leading-relaxed whitespace-pre-line text-justify">
+                  {{ umkm.description }}
+                </p>
               </div>
 
               <!-- Gallery -->
               <div v-if="umkm.gallery && umkm.gallery.length > 1">
                 <h2 class="font-heading font-semibold text-heading text-lg mb-4">Galeri</h2>
                 <GalleryGrid
-                  :images="umkm.gallery.map((src, i) => ({ id: i, src, thumb: src, alt: umkm.name }))"
+                  :images="
+                    umkm.gallery.map((src, i) => ({ id: i, src, thumb: src, alt: umkm.name }))
+                  "
                   :columns="2"
                 />
               </div>
@@ -128,7 +155,8 @@ function formatPrice(p) {
                   <a
                     v-if="umkm.googleMapsUrl"
                     :href="umkm.googleMapsUrl"
-                    target="_blank" rel="noopener noreferrer"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     class="text-xs text-primary font-medium hover:underline flex items-center gap-1"
                   >
                     Buka di Maps ↗
@@ -138,9 +166,15 @@ function formatPrice(p) {
                   <iframe
                     v-if="mapEmbedUrl"
                     :src="mapEmbedUrl"
-                    class="w-full h-full" frameborder="0" loading="lazy" allowfullscreen
+                    class="w-full h-full"
+                    frameborder="0"
+                    loading="lazy"
+                    allowfullscreen
                   />
-                  <div v-else class="absolute inset-0 flex items-center justify-center bg-background text-sm text-body">
+                  <div
+                    v-else
+                    class="absolute inset-0 flex items-center justify-center bg-background text-sm text-body"
+                  >
                     Peta tidak tersedia
                   </div>
                 </div>
@@ -152,7 +186,12 @@ function formatPrice(p) {
               <div class="sticky top-24 space-y-6">
                 <div v-for="(info, index) in businessInfos" :key="index" class="card-base p-6">
                   <h3 class="font-heading font-semibold text-heading mb-4">
-                    {{ info.isMain ? 'Informasi Usaha' : `Informasi Tambahan ${businessInfos.length > 2 ? '#' + index : ''}`.trim() }}
+                    <!-- {{
+                      info.isMain
+                        ? 'Informasi Usaha'
+                        : `Informasi Tambahan ${businessInfos.length > 2 ? '#' + index : ''}`.trim()
+                    }} -->
+                    Informasi Usaha
                   </h3>
                   <ul class="space-y-3.5 text-sm mb-5">
                     <li v-if="info.owner" class="flex gap-3">
@@ -182,18 +221,24 @@ function formatPrice(p) {
                     <a
                       v-if="info.phone"
                       :href="`https://wa.me/${info.phone}`"
-                      target="_blank" rel="noopener noreferrer"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       class="btn-primary w-full justify-center text-sm flex items-center gap-2"
                     >
                       <PhoneIcon class="w-4 h-4" /> Hubungi WhatsApp
                     </a>
                     <a
                       v-if="info.instagram"
-                      :href="`https://instagram.com/${info.instagram.replace('@','')}`"
-                      target="_blank" rel="noopener noreferrer"
+                      :href="`https://instagram.com/${info.instagram.replace('@', '')}`"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       class="btn-outline w-full justify-center text-sm flex items-center gap-2"
                     >
-                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                        />
+                      </svg>
                       {{ info.instagram }}
                     </a>
                   </div>
