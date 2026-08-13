@@ -56,7 +56,7 @@ const filteredDestinations = computed(() => {
         <SectionTitle
           label="Wisata Alam"
           title="Pilih Destinasi Favoritmu"
-          description="Dari arung jeram hingga berkemah di alam terbuka — Pandansari punya segalanya."
+          description="Nikmati petualangan, segarnya air, dan waktu santai dalam satu perjalanan"
           centered
         />
 

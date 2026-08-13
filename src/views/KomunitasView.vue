@@ -44,8 +44,8 @@ onMounted(async () => {
       <div class="container-site">
         <SectionTitle
           label="Komunitas Aktif"
-          title="Kekuatan Bersama Pandansari"
-          description="Komunitas-komunitas yang menjadi tulang punggung kehidupan sosial, budaya, dan olahraga Desa Pandansari."
+          title="Ragam Komunitas Pandansari"
+          description="Temukan semangat komunitas dan berbagai kegiatan kebersamaan di Desa Pandansari."
           centered
         />
 
