@@ -26,6 +26,13 @@ function normalizeUmkm(item) {
       marketplace: item.marketplace || null,
       whatsapp: item.whatsapp || null,
     },
+    businessInfos: (item.business_infos || []).map(b => ({
+      owner: b.owner,
+      established: b.established,
+      address: b.address,
+      phone: b.phone,
+      instagram: b.social_media?.instagram
+    })),
   }
 }
 

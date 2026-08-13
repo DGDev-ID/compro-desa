@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onBeforeUnmount, nextTick, computed } from 'vue'
+import { ref, shallowRef, watch, onBeforeUnmount, nextTick, computed } from 'vue'
 import { PageFlip } from 'page-flip'
 import {
   XIcon,
@@ -30,7 +30,7 @@ const emit = defineEmits(['close', 'download'])
 
 // ─── State ────────────────────────────────────────────────────────────────────
 const bookContainer = ref(null)
-const pageFlipInstance = ref(null)
+const pageFlipInstance = shallowRef(null)
 const currentPage = ref(0)
 const isFullscreen = ref(false)
 const imagesLoaded = ref(false)
@@ -45,7 +45,11 @@ const pageLabel = computed(() => {
 })
 
 // ─── PageFlip lifecycle ───────────────────────────────────────────────────────
+let flipInitId = 0
+
 async function initFlipBook() {
+  const currentInitId = ++flipInitId
+
   if (!bookContainer.value || !props.booklet?.pageImages?.length) return
 
   destroyFlipBook()
@@ -56,7 +60,12 @@ async function initFlipBook() {
   const images = props.booklet.pageImages
   await preloadImages(images)
 
-  await nextTick()
+  if (currentInitId !== flipInitId) return
+
+  // Berikan waktu sejenak agar container modal selesai transisi dan PageFlip punya waktu untuk render
+  await new Promise(resolve => setTimeout(resolve, 400))
+
+  if (currentInitId !== flipInitId || !bookContainer.value) return
 
   const containerW = bookContainer.value.parentElement.clientWidth
   const containerH = bookContainer.value.parentElement.clientHeight
@@ -97,6 +106,7 @@ async function initFlipBook() {
   })
 
   pageFlipInstance.value = pf
+  imagesLoaded.value = true // Sembunyikan loading screen setelah render selesai
 }
 
 function destroyFlipBook() {
@@ -118,7 +128,6 @@ function preloadImages(urls) {
         loaded++
         loadingProgress.value = Math.round((loaded / total) * 100)
         if (loaded === total) {
-          imagesLoaded.value = true
           resolve()
         }
       }
@@ -177,16 +186,6 @@ watch(
       document.body.style.overflow = ''
       window.removeEventListener('keydown', onKeyDown)
       destroyFlipBook()
-    }
-  },
-)
-
-watch(
-  () => props.booklet,
-  async (val) => {
-    if (val && props.open) {
-      await nextTick()
-      await initFlipBook()
     }
   },
 )

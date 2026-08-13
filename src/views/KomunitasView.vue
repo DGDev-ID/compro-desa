@@ -9,7 +9,8 @@ import { getCommunities } from '@/services/community.service'
 
 usePageHead({
   title: 'Komunitas',
-  description: 'Kenali komunitas-komunitas aktif yang menjadi kekuatan sosial dan budaya Desa Pandansari.',
+  description:
+    'Kenali komunitas-komunitas aktif yang menjadi kekuatan sosial dan budaya Desa Pandansari.',
 })
 
 const communities = ref([])
@@ -29,7 +30,7 @@ onMounted(async () => {
       <img
         src="/pict8.webp"
         alt="Komunitas Desa Pandansari"
-        class="w-full h-full object-cover object-[center_35%]"
+        class="w-full h-full object-cover object-[center_60%]"
       />
       <div class="absolute inset-0 hero-overlay flex items-end pb-10">
         <div class="container-site">

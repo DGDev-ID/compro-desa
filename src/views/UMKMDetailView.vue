@@ -36,6 +36,31 @@ const mapEmbedUrl = computed(() => {
   return `https://www.google.com/maps?q=${query}&output=embed`
 })
 
+const businessInfos = computed(() => {
+  if (!umkm.value) return []
+  
+  const infos = []
+  
+  // 1. Informasi Utama (dari field dasar)
+  if (umkm.value.owner || umkm.value.address || umkm.value.phone || umkm.value.established) {
+    infos.push({
+      isMain: true,
+      owner: umkm.value.owner,
+      established: umkm.value.established,
+      address: umkm.value.address,
+      phone: umkm.value.phone,
+      instagram: umkm.value.socialMedia?.instagram
+    })
+  }
+  
+  // 2. Informasi Tambahan (dari dashboard 'business_infos')
+  if (umkm.value.businessInfos && umkm.value.businessInfos.length > 0) {
+    infos.push(...umkm.value.businessInfos)
+  }
+  
+  return infos
+})
+
 function formatPrice(p) {
   if (!p) return '-'
   return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(p)
@@ -124,49 +149,54 @@ function formatPrice(p) {
 
             <!-- Sidebar -->
             <div>
-              <div class="card-base p-6 sticky top-24">
-                <h3 class="font-heading font-semibold text-heading mb-4">Informasi Usaha</h3>
-                <ul class="space-y-3.5 text-sm mb-5">
-                  <li class="flex gap-3">
-                    <UserIcon class="w-4 h-4 text-forest flex-shrink-0 mt-0.5" />
-                    <div>
-                      <span class="text-body block text-xs">Pemilik</span>
-                      <span class="font-medium text-heading">{{ umkm.owner }}</span>
-                    </div>
-                  </li>
-                  <li class="flex gap-3">
-                    <CalendarIcon class="w-4 h-4 text-forest flex-shrink-0 mt-0.5" />
-                    <div>
-                      <span class="text-body block text-xs">Berdiri Sejak</span>
-                      <span class="font-medium text-heading">{{ umkm.established }}</span>
-                    </div>
-                  </li>
-                  <li class="flex gap-3">
-                    <MapPinIcon class="w-4 h-4 text-forest flex-shrink-0 mt-0.5" />
-                    <div>
-                      <span class="text-body block text-xs">Alamat</span>
-                      <span class="font-medium text-heading">{{ umkm.address }}</span>
-                    </div>
-                  </li>
-                </ul>
+              <div class="sticky top-24 space-y-6">
+                <div v-for="(info, index) in businessInfos" :key="index" class="card-base p-6">
+                  <h3 class="font-heading font-semibold text-heading mb-4">
+                    {{ info.isMain ? 'Informasi Usaha' : `Informasi Tambahan ${businessInfos.length > 2 ? '#' + index : ''}`.trim() }}
+                  </h3>
+                  <ul class="space-y-3.5 text-sm mb-5">
+                    <li v-if="info.owner" class="flex gap-3">
+                      <UserIcon class="w-4 h-4 text-forest flex-shrink-0 mt-0.5" />
+                      <div>
+                        <span class="text-body block text-xs">Pemilik</span>
+                        <span class="font-medium text-heading">{{ info.owner }}</span>
+                      </div>
+                    </li>
+                    <li v-if="info.established" class="flex gap-3">
+                      <CalendarIcon class="w-4 h-4 text-forest flex-shrink-0 mt-0.5" />
+                      <div>
+                        <span class="text-body block text-xs">Berdiri Sejak</span>
+                        <span class="font-medium text-heading">{{ info.established }}</span>
+                      </div>
+                    </li>
+                    <li v-if="info.address" class="flex gap-3">
+                      <MapPinIcon class="w-4 h-4 text-forest flex-shrink-0 mt-0.5" />
+                      <div>
+                        <span class="text-body block text-xs">Alamat</span>
+                        <span class="font-medium text-heading">{{ info.address }}</span>
+                      </div>
+                    </li>
+                  </ul>
 
-                <div class="space-y-3">
-                  <a
-                    :href="`https://wa.me/${umkm.phone}`"
-                    target="_blank" rel="noopener noreferrer"
-                    class="btn-primary w-full justify-center text-sm flex items-center gap-2"
-                  >
-                    <PhoneIcon class="w-4 h-4" /> Hubungi WhatsApp
-                  </a>
-                  <a
-                    v-if="umkm.socialMedia.instagram"
-                    :href="`https://instagram.com/${umkm.socialMedia.instagram.replace('@','')}`"
-                    target="_blank" rel="noopener noreferrer"
-                    class="btn-outline w-full justify-center text-sm flex items-center gap-2"
-                  >
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    {{ umkm.socialMedia.instagram }}
-                  </a>
+                  <div class="space-y-3">
+                    <a
+                      v-if="info.phone"
+                      :href="`https://wa.me/${info.phone}`"
+                      target="_blank" rel="noopener noreferrer"
+                      class="btn-primary w-full justify-center text-sm flex items-center gap-2"
+                    >
+                      <PhoneIcon class="w-4 h-4" /> Hubungi WhatsApp
+                    </a>
+                    <a
+                      v-if="info.instagram"
+                      :href="`https://instagram.com/${info.instagram.replace('@','')}`"
+                      target="_blank" rel="noopener noreferrer"
+                      class="btn-outline w-full justify-center text-sm flex items-center gap-2"
+                    >
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                      {{ info.instagram }}
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

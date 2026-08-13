@@ -10,7 +10,8 @@ import { getDestinations } from '@/services/destination.service'
 
 usePageHead({
   title: 'Destinasi Wisata',
-  description: 'Temukan berbagai destinasi wisata alam unggulan di Desa Pandansari: Tubing, Outbound, River Camp, Agrowisata, dan lebih banyak lagi.',
+  description:
+    'Temukan berbagai destinasi wisata alam unggulan di Desa Pandansari: Tubing, Outbound, River Camp, Agrowisata, dan lebih banyak lagi.',
 })
 
 const destinations = ref([])
@@ -40,7 +41,7 @@ const filteredDestinations = computed(() => {
       <img
         src="/pict6.webp"
         alt="Destinasi Wisata Desa Pandansari"
-        class="w-full h-full object-cover"
+        class="w-full h-full object-cover object-[center_65%]"
       />
       <div class="absolute inset-0 hero-overlay flex items-end pb-10">
         <div class="container-site">
