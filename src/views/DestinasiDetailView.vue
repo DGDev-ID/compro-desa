@@ -24,6 +24,7 @@ import {
   CalendarIcon,
   TagIcon,
   ArrowLeftIcon,
+  MessageCircleIcon,
 } from '@lucide/vue'
 
 const route = useRoute()
@@ -62,7 +63,12 @@ async function loadData(slug) {
 }
 
 // WhatsApp number: prefer destination-specific, fallback to default
-const waNumber = computed(() => destination.value?.whatsapp || '6285123456789')
+const waNumber = computed(() => {
+  const p = destination.value?.whatsapp || '6285123456789'
+  const digits = p.replace(/\D/g, '')
+  if (digits.startsWith('0')) return '62' + digits.slice(1)
+  return digits
+})
 
 // Harga helpers — harga is now an object/array from backend
 const hargaWeekday = computed(() => {
@@ -310,9 +316,10 @@ watch(() => route.params.slug, (slug) => {
                   :href="`https://wa.me/${waNumber}?text=Saya ingin reservasi ${destination.title}`"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="btn-primary w-full justify-center text-sm"
+                  class="btn-primary w-full justify-center text-sm flex items-center gap-2"
                 >
-                  📱 Reservasi via WhatsApp
+                  <MessageCircleIcon class="w-4 h-4" />
+                  Reservasi via WhatsApp
                 </a>
                 <a
                   href="tel:+62285123456"
