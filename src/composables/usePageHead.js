@@ -1,18 +1,50 @@
 import { useHead } from '@unhead/vue'
+import { ref, computed } from 'vue'
+import api from '@/api/axios'
+
 // @unhead/vue v2 – requires createUnhead() called in main.ts and VueHeadMixin applied
 
-const APP_NAME = import.meta.env.VITE_APP_NAME || 'Desa Pandansari'
+const envAppName = import.meta.env.VITE_APP_NAME || 'Desa Pandansari'
 const BASE_DESCRIPTION =
   'Website resmi Desa Pandansari, Kecamatan Batang, Kabupaten Batang, Jawa Tengah. Desa wisata alam yang indah.'
+
+// Store global SEO data reactively so all pages automatically update when data is fetched
+const globalSeoData = ref(null)
+let fetchPromise = null
+
+function fetchGlobalSeo() {
+  if (globalSeoData.value) return
+  if (!fetchPromise) {
+    fetchPromise = api.get('/profil').then(res => {
+      globalSeoData.value = res.data.data.setting || {}
+    }).catch(e => {
+      console.error('[usePageHead] Failed to fetch SEO settings:', e)
+    })
+  }
+}
 
 /**
  * Composable for setting page <head> meta tags.
  * Usage: usePageHead({ title: 'Destinasi Wisata', description: '...' })
  */
 export function usePageHead({ title, description, image, url } = {}) {
-  const pageTitle = title ? `${title} – ${APP_NAME}` : APP_NAME
-  const pageDesc = description || BASE_DESCRIPTION
-  const pageImage = image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80'
+  // Trigger the fetch if not already done
+  fetchGlobalSeo()
+
+  const pageTitle = computed(() => {
+    const appName = globalSeoData.value?.nama_website || envAppName
+    if (title) return `${title} – ${appName}`
+    return globalSeoData.value?.meta_title || appName
+  })
+
+  const pageDesc = computed(() => {
+    if (description) return description
+    return globalSeoData.value?.meta_description || globalSeoData.value?.footer_description || BASE_DESCRIPTION
+  })
+
+  const pageImage = computed(() => {
+    return image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80'
+  })
 
   useHead({
     title: pageTitle,

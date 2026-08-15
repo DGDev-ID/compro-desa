@@ -8,6 +8,7 @@ import CtaSection from '@/components/common/CtaSection.vue'
 import { usePageHead } from '@/composables/usePageHead'
 import { MapPinIcon, PhoneIcon, MailIcon, ClockIcon, MessageCircleIcon, CheckIcon } from '@lucide/vue'
 import { getContactInfo } from '@/services/contact.service'
+import { getFaqs } from '@/services/faq.service'
 
 usePageHead({
   title: 'Kontak',
@@ -21,9 +22,16 @@ const formError = ref('')
 
 // Contact info from backend
 const contact = ref(null)
+const dynamicFaqs = ref([])
 
 onMounted(async () => {
   contact.value = await getContactInfo()
+  const fetchedFaqs = await getFaqs()
+  if (fetchedFaqs && fetchedFaqs.length > 0) {
+    dynamicFaqs.value = fetchedFaqs
+  } else {
+    dynamicFaqs.value = faqs
+  }
 })
 
 const waHref = computed(() => {
@@ -297,7 +305,7 @@ const faqs = [
           description="Temukan jawaban cepat untuk pertanyaan umum seputar Desa Pandansari."
           centered
         />
-        <FaqAccordion :items="faqs" />
+        <FaqAccordion :items="dynamicFaqs" />
       </div>
     </section>
 

@@ -39,7 +39,7 @@ function formatPrice(price) {
 
       <div class="flex items-center gap-2 text-xs text-body mb-4">
         <ClockIcon class="w-3.5 h-3.5 text-forest flex-shrink-0" />
-        <span>{{ destination.duration }}</span>
+        <span>{{ destination.openHours }}</span>
       </div>
 
       <div class="flex items-center justify-between pt-4 border-t border-border mt-auto">

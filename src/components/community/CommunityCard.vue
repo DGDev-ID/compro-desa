@@ -27,12 +27,12 @@ defineProps({
         {{ community.shortDescription }}
       </p>
 
-      <div class="flex items-center gap-4 text-xs text-body mb-4 pt-3 border-t border-border">
-        <span class="flex items-center gap-1.5">
+      <div v-if="community.memberCount || community.founded" class="flex items-center gap-4 text-xs text-body mb-4 pt-3 border-t border-border">
+        <span v-if="community.memberCount" class="flex items-center gap-1.5">
           <UsersIcon class="w-3.5 h-3.5 text-forest" />
           {{ community.memberCount }} Anggota
         </span>
-        <span class="flex items-center gap-1.5">
+        <span v-if="community.founded" class="flex items-center gap-1.5">
           <CalendarIcon class="w-3.5 h-3.5 text-forest" />
           Sejak {{ community.founded }}
         </span>

@@ -17,6 +17,8 @@ import ArticleCard from '@/components/article/ArticleCard.vue'
 import GalleryGrid from '@/components/common/GalleryGrid.vue'
 import CtaSection from '@/components/common/CtaSection.vue'
 
+import { Waves, Tent, ShoppingBag, Handshake } from 'lucide-vue-next'
+
 import { usePageHead } from '@/composables/usePageHead'
 import { getFeaturedDestinations } from '@/services/destination.service'
 import { getFeaturedCommunities } from '@/services/community.service'
@@ -34,16 +36,8 @@ usePageHead({
 
 const heroSlides = ref([
   {
-    image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920&q=85',
+    image: '/pict12.webp',
     caption: 'Alam Asri Desa Pandansari',
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=85',
-    caption: 'Keindahan Sungai Sambong',
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=85',
-    caption: 'Hamparan Alam Hijau',
   },
 ])
 
@@ -128,7 +122,7 @@ onMounted(async () => {
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
               <RouterLink to="/destinasi" class="btn-primary text-sm">
-                🗺️ Jelajahi Destinasi
+                Jelajahi Destinasi
               </RouterLink>
               <RouterLink to="/kontak" class="btn-outline-white text-sm"> Hubungi Kami </RouterLink>
             </div>
@@ -210,7 +204,7 @@ onMounted(async () => {
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
           <div class="card-base p-6 hover:shadow-soft-xl transition-all duration-300">
             <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2">
-              <span class="text-2xl">🌊</span> Wisata Alam
+              <Waves class="w-6 h-6 text-primary" /> Wisata Alam
             </h3>
             <p class="text-body leading-relaxed">
               Nikmati keindahan alam Desa Wisata Pandansari melalui berbagai destinasi wisata yang
@@ -219,7 +213,7 @@ onMounted(async () => {
           </div>
           <div class="card-base p-6 hover:shadow-soft-xl transition-all duration-300">
             <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2">
-              <span class="text-2xl">🏕️</span> Aktivitas Wisata
+              <Tent class="w-6 h-6 text-primary" /> Aktivitas Wisata
             </h3>
             <p class="text-body leading-relaxed">
               Beragam aktivitas dapat dinikmati oleh wisatawan, mulai dari river tubing, outbound,
@@ -228,7 +222,7 @@ onMounted(async () => {
           </div>
           <div class="card-base p-6 hover:shadow-soft-xl transition-all duration-300">
             <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2">
-              <span class="text-2xl">🛍️</span> UMKM & Ekonomi Lokal
+              <ShoppingBag class="w-6 h-6 text-primary" /> UMKM & Ekonomi Lokal
             </h3>
             <p class="text-body leading-relaxed">
               Desa Pandansari memiliki potensi ekonomi lokal yang didukung oleh UMKM makanan khas
@@ -238,7 +232,7 @@ onMounted(async () => {
           </div>
           <div class="card-base p-6 hover:shadow-soft-xl transition-all duration-300">
             <h3 class="text-xl font-bold font-heading mb-3 flex items-center gap-2">
-              <span class="text-2xl">🤝</span> Komunitas Aktif
+              <Handshake class="w-6 h-6 text-primary" /> Komunitas Aktif
             </h3>
             <p class="text-body leading-relaxed">
               Berbagai komunitas masyarakat berperan aktif dalam mendukung kegiatan sosial,

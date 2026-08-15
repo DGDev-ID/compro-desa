@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { MapPinIcon, PhoneIcon, MailIcon } from '@lucide/vue'
 import { getContactInfo } from '@/services/contact.service'
+import { getDestinations } from '@/services/destination.service'
 
 const quickLinks = [
   { to: '/', label: 'Beranda' },
@@ -24,12 +25,26 @@ const destinations = [
   { to: '/destinasi/agrowisata-pandansari', label: 'Agrowisata' },
 ]
 
+const dynamicDestinations = ref([])
 const currentYear = new Date().getFullYear()
 
 const contact = ref(null)
 
 onMounted(async () => {
   contact.value = await getContactInfo()
+  try {
+    const dests = await getDestinations({ perPage: 6 })
+    if (dests && dests.data && dests.data.length > 0) {
+      dynamicDestinations.value = dests.data.map(d => ({
+        to: `/destinasi/${d.slug}`,
+        label: d.title
+      }))
+    } else {
+      dynamicDestinations.value = destinations
+    }
+  } catch (e) {
+    dynamicDestinations.value = destinations
+  }
 })
 
 // Helpers to build hrefs safely
@@ -145,7 +160,7 @@ function mailHref(e) { return e ? `mailto:${e}` : '#' }
             Destinasi
           </h3>
           <ul class="space-y-2.5">
-            <li v-for="dest in destinations" :key="dest.to">
+            <li v-for="dest in dynamicDestinations" :key="dest.to">
               <RouterLink
                 :to="dest.to"
                 class="text-sm text-white/65 hover:text-primary transition-colors flex items-center gap-2 group"
