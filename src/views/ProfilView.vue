@@ -161,7 +161,7 @@ onMounted(async () => {
             <p
               v-for="(paragraph, i) in (profile.about.history || '').split('\n\n')"
               :key="i"
-              class="text-body leading-relaxed mb-4"
+              class="text-body leading-relaxed mb-4 text-justify"
             >
               {{ paragraph }}
             </p>
